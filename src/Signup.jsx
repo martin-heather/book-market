@@ -38,9 +38,9 @@ class Signup extends Component {
   render = () => {
     return (
       <form onSubmit={this.handleSubmit}>
-        Username
+        Username{' '}
         <input type="text" onChange={this.handleUsernameChange} />
-        Password
+        Password{' '}
         <input type="text" onChange={this.handlePasswordChange} />
         <input type="submit" />
       </form>

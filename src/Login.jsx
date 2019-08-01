@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-class UnconnectedLogin extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,14 +43,14 @@ class UnconnectedLogin extends Component {
   render = () => {
     return (
       <form onSubmit={this.handleSubmit}>
-        Username
+        Username{' '}
         <input type="text" onChange={this.handleUsernameChange} />
-        Password
+        Password{' '}
         <input type="text" onChange={this.handlePasswordChange} />
         <input type="submit" />
       </form>
     );
   };
 }
-let Login = connect()(UnconnectedLogin);
-export default Login;
+export default connect()(Login);
+
