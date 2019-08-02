@@ -1,9 +1,8 @@
 import { createStore } from 'redux';
-import { inventory, userProfiles } from './data.js';
 
 const initialState = {
-  allInventory: [...inventory],
-  allUserProfiles: [...userProfiles],
+  allInventory: [],
+  allUserProfiles: [],
   loggedIn: false, 
   username: '',
   query: '',
@@ -15,6 +14,11 @@ function reducer(state = initialState, action) {
       return { ...state, loggedIn: true, username: action.username };
     case 'LOGOUT':
       return { ...state, loggedIn: false, username: '' };
+      case 'UPDATE_INVENTORY':
+        return {
+          ...state,
+          allInventory: action.inventory,
+        };
     case 'SET_QUERY':
       return { ...state, query: action.query };
     default:

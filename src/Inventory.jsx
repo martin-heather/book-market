@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import PageHeader from './PageHeader.jsx';
 import MenuBar from './MenuBar.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import ItemDetails from './ItemDetails.jsx';
 import AddItemForm from './AddItemForm.jsx';
+
 import styled from 'styled-components';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
 
@@ -17,17 +19,31 @@ const SortDiv = styled.div`
 
 class Inventory extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      sortBy: '',
-    };
+        super(props);
+        this.state = {
+          sortBy: '',
+        };
+      };
+  componentDidMount() {
+    this.updateInventory();
+    setInterval(this.updateInventory, 500);
   }
+  updateInventory = async () => {
+    const response = await fetch('/inventory');
+    const body = await response.json();
+    if (body.success) {
+      this.props.dispatch({ type: 'UPDATE_INVENTORY', inventory: body.inventory });
+    } else {
+      this.props.dispatch({ type: 'LOGOUT' });
+    }
+  };
 
   handleSortChange = (evt) => {
     this.setState({ sortBy: evt.target.value });
   };
 
   render = () => {  
+    console.log('this.props.inventory: ', this.props.inventory);
     const searchResults = this.props.inventory.filter((item) =>
     item.title.toLowerCase().includes(this.props.query.toLowerCase())
   );
@@ -66,8 +82,8 @@ class Inventory extends Component {
       <div className='ItemCards'>  
           {searchResults.map(inventoryCards)}
       </div>
-    <ItemDetails/>
-    <AddItemForm/>
+    {/* <ItemDetails/>
+    <AddItemForm/> */}
       </>
     );
   };

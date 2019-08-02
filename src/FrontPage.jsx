@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+
 import FrontPageHeader from './FrontPageHeader.jsx';
 import PageHeader from './PageHeader.jsx';
 import FrontMenuBar from './FrontMenuBar.jsx';
@@ -19,6 +21,8 @@ class FrontPage extends Component {
       this.props.dispatch({ type: 'LOGIN_SUCCESS', username: body.username });
     }
   }
+
+
   render() {
     if (this.props.lgin) {
       return (
