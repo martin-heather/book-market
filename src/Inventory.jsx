@@ -23,8 +23,6 @@ class Inventory extends Component {
     };
   }
 
- 
-
   handleSortChange = (evt) => {
     this.setState({ sortBy: evt.target.value });
   };

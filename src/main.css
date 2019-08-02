@@ -14,12 +14,12 @@ html {
 }
 
 .Logo {
-    font-family: 'Fredericka the Great', cursive;
+    font-family: 'Fredericka the Great', serif;
     font-size: 7rem;
 }
 
 .LogoShrinks {
-  font-family: 'Fredericka the Great', cursive;
+  font-family: 'Fredericka the Great', serif;
   font-size: 4rem;
   -webkit-animation-name: LogoShrinks; /* Safari 4.0 - 8.0 */
   -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */

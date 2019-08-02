@@ -5,16 +5,19 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      name: '',
       password: '',
+      itemsInWishList: [],
+      itemsForSale: [],
+      itemsInCart: [],
     };
   }
   handleUsernameChange = event => {
-    console.log('new username', event.target.value);
+    console.log('new username: ', event.target.value);
     this.setState({ username: event.target.value });
   };
   handlePasswordChange = event => {
-    console.log('new password', event.target.value);
+    console.log('new password: ', event.target.value);
     this.setState({ password: event.target.value });
   };
   handleSubmit = async evt => {
