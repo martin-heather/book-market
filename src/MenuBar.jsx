@@ -22,13 +22,14 @@ const MenuLink = styled(Link)`
 `;
 
 function MenuBar(props) {
-    const { setLogout } = props;
+    const { setLogout, handleQueryChange, query } = props;
     return (
       <MenuWrapper>
         <Left>
           <MenuLink to="/">Home</MenuLink>
         </Left>
         <Right>
+        Search Books: <input type="text" onChange={handleQueryChange} value={query} />
           <MenuLink to="/">Sell a Book</MenuLink>
           <MenuLink to="/">Wish List</MenuLink>
           <MenuLink to="/">Shopping Cart</MenuLink>
@@ -42,12 +43,19 @@ function MenuBar(props) {
     fetch('/logout', { method: 'POST', credentials: 'same-origin' });
     dispatch({ type: 'LOGOUT' });
   }
+
+  const mapStateToProps = (state) => ({
+    query: state.query,
+  });
+
   const mapDispatchToProps = (dispatch) => ({
     setLogout: () => handleLogout(dispatch),
+    handleQueryChange: (evt) =>
+      dispatch({ type: 'SET_QUERY', query: evt.target.value }),
   });
   
   export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(MenuBar);
 

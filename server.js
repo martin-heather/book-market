@@ -21,7 +21,7 @@ const generateId = () => {
 //global variables
 const sessions = {};
 const passwords = {};
-const users = {};
+const userProfiles = {};
 const inventory = {};
 
 app.use('/', express.static('build')); // Needed for the HTML and JS files

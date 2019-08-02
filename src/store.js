@@ -6,14 +6,17 @@ const initialState = {
   allUserProfiles: [...userProfiles],
   loggedIn: false, 
   username: '',
+  query: '',
 }
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
       return { ...state, loggedIn: true, username: action.username };
-      case 'LOGOUT':
+    case 'LOGOUT':
       return { ...state, loggedIn: false, username: '' };
+    case 'SET_QUERY':
+      return { ...state, query: action.query };
     default:
       return state;
   }

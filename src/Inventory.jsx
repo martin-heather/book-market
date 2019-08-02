@@ -5,6 +5,7 @@ import MenuBar from './MenuBar.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import ItemDetails from './ItemDetails.jsx';
+import AddItemForm from './AddItemForm.jsx';
 import styled from 'styled-components';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
 
@@ -22,11 +23,17 @@ class Inventory extends Component {
     };
   }
 
+ 
+
   handleSortChange = (evt) => {
     this.setState({ sortBy: evt.target.value });
   };
 
   render = () => {  
+    const searchResults = this.props.inventory.filter((item) =>
+    item.title.toLowerCase().includes(this.props.query.toLowerCase())
+  );
+
     let inventoryCards = item => (
         <ItemCard>
         <img src={item.imagePath} /> 
@@ -59,9 +66,10 @@ class Inventory extends Component {
         </SortDiv> 
 
       <div className='ItemCards'>  
-          {this.props.inventory.map(inventoryCards)}
+          {searchResults.map(inventoryCards)}
       </div>
     <ItemDetails/>
+    <AddItemForm/>
       </>
     );
   };
@@ -71,6 +79,7 @@ class Inventory extends Component {
 const mapStateToProps = (state, props) => {
   return { 
     inventory: state.allInventory,  
-    lgin: state.loggedIn };
+    lgin: state.loggedIn,
+  query: state.query };
 };
 export default connect(mapStateToProps)(Inventory);
