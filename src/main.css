@@ -13,13 +13,17 @@ html {
     font-size: 1.6rem;
 }
 
+img {
+  box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
 .Logo {
     font-family: 'Fredericka the Great', serif;
     font-size: 7rem;
 }
 
 .LogoShrinks {
-  font-family: 'Fredericka the Great', serif;
+  font-family: 'Fredericka the Great', 'Arbutus Slab', serif;
   font-size: 4rem;
   -webkit-animation-name: LogoShrinks; /* Safari 4.0 - 8.0 */
   -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
@@ -52,7 +56,6 @@ html {
 
 .ItemCards img {
   max-width: 120px; 
-  box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
 /* .overlay {

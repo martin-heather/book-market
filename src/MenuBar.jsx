@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Header } from './StyledComponents/Header.jsx';
 import { MenuLink } from './StyledComponents/MenuLink.jsx';
 import { Left, Right } from './StyledComponents/Divs.jsx';
+import { Input } from './StyledComponents/Buttons.jsx';
 
 const MenuWrapper = styled(Header)`
   display: flex;
@@ -21,7 +22,7 @@ function MenuBar(props) {
           <MenuLink to="/">Home</MenuLink>
         </Left>
         <Right>
-        Search Books: <input type="text" onChange={handleQueryChange} value={query} />
+        Search Books: <Input type="text" onChange={handleQueryChange} value={query} />
           <MenuLink to="/">Sell a Book</MenuLink>
           <MenuLink to="/">Wish List</MenuLink>
           <MenuLink to="/">Shopping Cart</MenuLink>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Button, Input } from './StyledComponents/Buttons.jsx';
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -42,10 +44,10 @@ class Signup extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         Username{' '}
-        <input type="text" onChange={this.handleUsernameChange} />
+        <Input type="text" onChange={this.handleUsernameChange} />
         Password{' '}
-        <input type="text" onChange={this.handlePasswordChange} />
-        <input type="submit" />
+        <Input type="text" onChange={this.handlePasswordChange} />
+        <Button>submit</Button>
       </form>
     );
   };

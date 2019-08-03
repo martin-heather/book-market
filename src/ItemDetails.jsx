@@ -26,7 +26,7 @@ render = () => {
         </DetailDiv>
         <DetailDiv >
         <div><strong>{item.title}</strong></div>
-          <div>by{' '}{item.author}</div>        
+          <div>by{' '}{item.author.split(",").reverse().join(' ')}</div>        
           <div>${item.price}</div>
           <Button>Add to Cart</Button>{' '}
           <GhostButton>Add to Wish List</GhostButton>

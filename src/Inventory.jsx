@@ -13,6 +13,7 @@ import AddItemForm from './AddItemForm.jsx';
 import styled from 'styled-components';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
+import { Button, GhostButton, Input } from './StyledComponents/Buttons.jsx';
 
 const SortDiv = styled.div`
   text-align: right;
@@ -27,21 +28,22 @@ class Inventory extends Component {
           sortBy: '',
         };
       };
-  componentDidMount() {
-    this.updateInventory();
-  }
-  updateInventory = async () => {
-    const response = await fetch('/inventory');
-    const body = await response.json();
-    if (body.success) {
-      this.props.dispatch({ type: 'UPDATE_INVENTORY', inventory: body.inventory });
-    } else {
-      this.props.dispatch({ type: 'LOGOUT' });
-    }
-  };
+  // componentDidMount() {
+  //   this.updateInventory();
+  // }
+  // updateInventory = async () => {
+  //   const response = await fetch('/inventory');
+  //   const body = await response.json();
+  //   if (body.success) {
+  //     this.props.dispatch({ type: 'UPDATE_INVENTORY', inventory: body.inventory });
+  //   } else {
+  //     this.props.dispatch({ type: 'LOGOUT' });
+  //   }
+  // };
 
   handleSortChange = (evt) => {
     this.setState({ sortBy: evt.target.value });
+    console.log(this.state);
   };
 
   renderInventory = () => {  
@@ -49,14 +51,16 @@ class Inventory extends Component {
     item.title.toLowerCase().includes(this.props.query.toLowerCase())
   );
 
+  // let author = switcheroo logic
+
     let inventoryCards = item => (
         <ItemCard>
         <Link to={`/item/${item.id}`}><img src={item.imagePath} /></Link>
         <div><strong>{item.title}</strong></div>
-        <div>by{' '}{item.author}</div>        
+        <div>by{' '}{item.author.split(",").reverse().join(' ')}</div>        
         <div>${item.price}</div>
         <Link to={`/item/${item.id}`}>
-          <button>Item Details</button>      
+          <Button>Item Details</Button>      
         </Link>
       </ItemCard>
     );
@@ -77,9 +81,10 @@ class Inventory extends Component {
           <option>Newest First</option>            
         </select>
       </label>
-      <button className="form-button">
+{' '}
+      <GhostButton className="form-button">
       Submit
-    </button>
+    </GhostButton>
                 </form>
       </SortDiv> 
 

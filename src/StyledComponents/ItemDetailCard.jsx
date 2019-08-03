@@ -6,7 +6,7 @@ export const ItemDetailCard = styled.div`
   text-align: center;
   color: rgba(0, 44, 89, 1);
   font-size: 1rem;
-  margin: 10px auto;
+  margin: 40px auto;
   padding: 10px;
   background-color: #fff;
   border-radius: 6px;
