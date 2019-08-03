@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import styled from 'styled-components';
-import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
+import { ItemDetailCard, DetailDiv } from './StyledComponents/ItemDetailCard.jsx';
+import { Button, GhostButton } from './StyledComponents/Buttons.jsx';
 
 const Desc = styled.div`
   font-size: .75rem;
   text-align: left;
+  padding: 15px;
 `;
 
 class ItemDetails extends Component {
@@ -18,19 +20,18 @@ render = () => {
   let item = this.props.itemObject;
         return ( 
       <ItemDetailCard>
-      <div>
-          <div>
+        <DetailDiv>
           <img src={item.imagePath} />
-          <div><strong>{item.title}</strong></div>
-        <div>by{' '}{item.author}</div>        
-        <div>${item.price}</div>
-        <button>Add to Cart</button>{' '}
-        <button>Add to Wish List</button>
-          </div>
-        <div>
-        <Desc>{item.desc}</Desc>
-        </div>
-     </div>
+          
+        </DetailDiv>
+        <DetailDiv >
+        <div><strong>{item.title}</strong></div>
+          <div>by{' '}{item.author}</div>        
+          <div>${item.price}</div>
+          <Button>Add to Cart</Button>{' '}
+          <GhostButton>Add to Wish List</GhostButton>
+          <Desc>{item.desc}</Desc>
+        </DetailDiv>
       </ItemDetailCard>  
       );
   };

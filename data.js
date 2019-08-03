@@ -31,7 +31,7 @@ export const inventory = [
     category: 'young adult',
     language: 'English',
     imagePath: '/images/dreadnought.jpg',
-    price: 10.99,
+    price: 15.99,
     timeAdded: 1564529965305,
   },
   {
@@ -42,7 +42,7 @@ export const inventory = [
     category: 'general fiction',
     language: 'French',
     imagePath: '/images/avalee.jpg',
-    price: 10.99,
+    price: 14.99,
     timeAdded: 1564676760422,
   },
   {
@@ -53,7 +53,7 @@ export const inventory = [
   category: 'nonfiction',
   language: 'French',
   imagePath: '/images/besoin.jpg',
-  price: 10.99,
+  price: 24.99,
   timeAdded: 1564676760445,
 },
 {
@@ -64,7 +64,7 @@ export const inventory = [
   category: 'nonfiction',
   language: 'English',
   imagePath: '/images/menagerie.jpg',
-  price: 10.99,
+  price: 21.99,
   timeAdded: 1564676760512,
 },
 {
@@ -75,7 +75,7 @@ export const inventory = [
   category: 'fiction',
   language: 'English',
   imagePath: '/images/robber.jpg',
-  price: 10.99,
+  price: 14.99,
   timeAdded: 1564676760523,
 },
 {
@@ -86,7 +86,7 @@ export const inventory = [
   category: 'fiction',
   language: 'French',
   imagePath: '/images/hiver.jpg',
-  price: 10.99,
+  price: 6.99,
   timeAdded: 1564676760534,
 },
 {
@@ -97,7 +97,7 @@ export const inventory = [
   category: 'fiction',
   language: 'English',
   imagePath: '/images/bread.jpg',
-  price: 10.99,
+  price: 18.99,
   timeAdded: 1564676760545,
 },
 {
@@ -108,7 +108,7 @@ export const inventory = [
   category: 'nonfiction',
   language: 'English',
   imagePath: '/images/gender.jpg',
-  price: 10.99,
+  price: 22.99,
   timeAdded: 1564676760556,
 },
 {
@@ -119,7 +119,7 @@ export const inventory = [
   category: 'fiction',
   language: 'French',
   imagePath: '/images/impurete.jpg',
-  price: 10.99,
+  price: 13.99,
   timeAdded: 1564676760567,
 },
 {
@@ -130,7 +130,7 @@ export const inventory = [
   category: 'fiction',
   language: 'French',
   imagePath: '/images/aurores.jpg',
-  price: 10.99,
+  price: 15.99,
   timeAdded: 1564676760567,
 },
 {
@@ -141,7 +141,7 @@ export const inventory = [
   category: 'nonfiction',
   language: 'English',
   imagePath: '/images/riddle.jpg',
-  price: 10.99,
+  price: 17.99,
   timeAdded: 1564676760578,
 },
 {
@@ -152,9 +152,9 @@ export const inventory = [
   category: 'fiction',
   language: 'French',
   imagePath: '/images/ru.jpg',
-  price: 10.99,
+  price: 11.99,
   timeAdded: 1564676760589,
-},
+},  
 ];
 
 export const userProfiles = [

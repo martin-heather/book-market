@@ -51,7 +51,7 @@ class Inventory extends Component {
 
     let inventoryCards = item => (
         <ItemCard>
-        <img src={item.imagePath} /> 
+        <Link to={`/item/${item.id}`}><img src={item.imagePath} /></Link>
         <div><strong>{item.title}</strong></div>
         <div>by{' '}{item.author}</div>        
         <div>${item.price}</div>

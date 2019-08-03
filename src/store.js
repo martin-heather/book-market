@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { inventory } from '../data.js';
+import { inventory, userProfiles } from '../data.js';
 
 const initialState = {
   allInventory: [...inventory],
