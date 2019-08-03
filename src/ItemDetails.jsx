@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import styled from 'styled-components';
 import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
 
@@ -11,39 +12,49 @@ const Desc = styled.div`
 class ItemDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      itemId: 3,
-    };
+};
+componentDidMount() {
+  this.updateInventory();
+  
+}
+updateInventory = async () => {
+  const response = await fetch('/inventory');
+  const body = await response.json();
+  if (body.success) {
+    this.props.dispatch({ type: 'UPDATE_INVENTORY', inventory: body.inventory });
+  } else {
+    this.props.dispatch({ type: 'LOGOUT' });
+  }
 };
 
-render() { 
-    let inventoryArr = this.props.inventory.filter(item => item.id === this.state.itemId);
-    let itemObject = inventoryArr[0];   
-
-    return ( 
-        <>
+render = () => {  
+  let item = this.props.itemObject;
+        return ( 
       <ItemDetailCard>
+      <div>
           <div>
-          <img src={itemObject.imagePath} /> 
-          <div><strong>{itemObject.title}</strong></div>
-        <div>by{' '}{itemObject.author}</div>        
-        <div>${itemObject.price}</div>
+          <img src={item.imagePath} /> 
+          <div><strong>{item.title}</strong></div>
+        <div>by{' '}{item.author}</div>        
+        <div>${item.price}</div>
         <button>Add to Cart</button>{' '}
         <button>Add to Wish List</button>
           </div>
         <div>
-        <Desc>{itemObject.desc}</Desc>
-        </div>     
-      </ItemDetailCard>
-      </>
-    );
+        <Desc>{item.desc}</Desc>
+        </div>
+     </div>
+      </ItemDetailCard>  
+      );
   };
 };
+
     
 const mapStateToProps = (state, props) => {
   return { 
     inventory: state.allInventory,  
-    lgin: state.loggedIn };
+    lgin: state.loggedIn,
+  };
 };
 
 export default connect(mapStateToProps)(ItemDetails);

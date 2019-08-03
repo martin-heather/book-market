@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router';
 
 import PageHeader from './PageHeader.jsx';
 import MenuBar from './MenuBar.jsx';
@@ -10,6 +11,7 @@ import AddItemForm from './AddItemForm.jsx';
 
 import styled from 'styled-components';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
+import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
 
 const SortDiv = styled.div`
   text-align: right;
@@ -42,8 +44,7 @@ class Inventory extends Component {
     this.setState({ sortBy: evt.target.value });
   };
 
-  render = () => {  
-    console.log('this.props.inventory: ', this.props.inventory);
+  renderInventory = () => {  
     const searchResults = this.props.inventory.filter((item) =>
     item.title.toLowerCase().includes(this.props.query.toLowerCase())
   );
@@ -58,33 +59,55 @@ class Inventory extends Component {
       </ItemCard>
     );
 
-    return ( 
+    return (
       <>
-      <SortDiv>
-          <form>
-          <strong>Sort by</strong>{' '} 
-          <label>
-          <select type="text"
-          onChange={this.handleSortChange}
-          value={this.state.sortBy}>
-            <option default disabled hidden>Select One</option>
-            <option>Author Name</option>
-            <option>Price</option>
-            <option>Newest First</option>            
-          </select>
-        </label>
-        <button className="form-button">
-        Submit
-      </button>
-                  </form>
-        </SortDiv> 
 
-      <div className='ItemCards'>  
+    <SortDiv>
+        <form>
+        <strong>Sort by</strong>{' '} 
+        <label>
+        <select type="text"
+        onChange={this.handleSortChange}
+        value={this.state.sortBy}>
+          <option default disabled hidden>Select One</option>
+          <option>Author Name</option>
+          <option>Price</option>
+          <option>Newest First</option>            
+        </select>
+      </label>
+      <button className="form-button">
+      Submit
+    </button>
+                </form>
+      </SortDiv> 
+
+    <div className='ItemCards'>  
           {searchResults.map(inventoryCards)}
       </div>
-    {/* <ItemDetails/>
-    <AddItemForm/> */}
+
       </>
+    );
+  };
+
+renderItemDetails = routerData => {
+  let itemId = routerData.match.params.id;
+  console.log('itemId: ', itemId);
+  let inventoryArr = this.props.inventory.filter((item) => itemId === this.state.itemId);
+    return itemObject = inventoryArr[0];  
+    console.log('itemObject: ', itemObject);
+
+    return ( 
+      <ItemDetails item={itemObject} />
+      );
+}
+    
+render () {
+  return ( 
+    <>   
+      <Route exact={true} path='/' render={this.renderInventory} />
+      <Route exact={true} path='/item/:id' render={this.renderItemDetails} />
+      <Route exact={true} path='/addinventory' render={this.renderAddInventory} />
+    </>  
     );
   };
 };
