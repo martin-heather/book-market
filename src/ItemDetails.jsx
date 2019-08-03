@@ -13,19 +13,6 @@ class ItemDetails extends Component {
   constructor(props) {
     super(props);
 };
-componentDidMount() {
-  this.updateInventory();
-  
-}
-updateInventory = async () => {
-  const response = await fetch('/inventory');
-  const body = await response.json();
-  if (body.success) {
-    this.props.dispatch({ type: 'UPDATE_INVENTORY', inventory: body.inventory });
-  } else {
-    this.props.dispatch({ type: 'LOGOUT' });
-  }
-};
 
 render = () => {  
   let item = this.props.itemObject;
@@ -33,7 +20,7 @@ render = () => {
       <ItemDetailCard>
       <div>
           <div>
-          <img src={item.imagePath} /> 
+          <img src={item.imagePath} />
           <div><strong>{item.title}</strong></div>
         <div>by{' '}{item.author}</div>        
         <div>${item.price}</div>

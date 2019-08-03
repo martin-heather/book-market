@@ -1,7 +1,8 @@
 import { createStore } from 'redux';
+import { inventory } from '../data.js';
 
 const initialState = {
-  allInventory: [],
+  allInventory: [...inventory],
   allUserProfiles: [],
   loggedIn: false, 
   username: '',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import PageHeader from './PageHeader.jsx';
 import MenuBar from './MenuBar.jsx';
@@ -28,7 +29,6 @@ class Inventory extends Component {
       };
   componentDidMount() {
     this.updateInventory();
-    setInterval(this.updateInventory, 500);
   }
   updateInventory = async () => {
     const response = await fetch('/inventory');
@@ -55,7 +55,9 @@ class Inventory extends Component {
         <div><strong>{item.title}</strong></div>
         <div>by{' '}{item.author}</div>        
         <div>${item.price}</div>
-        <button>Item Details</button>
+        <Link to={`/item/${item.id}`}>
+          <button>Item Details</button>      
+        </Link>
       </ItemCard>
     );
 
@@ -92,12 +94,15 @@ class Inventory extends Component {
 renderItemDetails = routerData => {
   let itemId = routerData.match.params.id;
   console.log('itemId: ', itemId);
-  let inventoryArr = this.props.inventory.filter((item) => itemId === this.state.itemId);
-    return itemObject = inventoryArr[0];  
+  console.log(this.props.inventory);
+
+  let inventoryArr = this.props.inventory.filter(item => item.id == itemId);
+  console.log(inventoryArr);
+  let itemObject = inventoryArr[0];
     console.log('itemObject: ', itemObject);
 
     return ( 
-      <ItemDetails item={itemObject} />
+      <ItemDetails itemObject={itemObject} />
       );
 }
     
