@@ -39,6 +39,8 @@ class Home extends Component {
     item.title.toLowerCase().includes(this.props.query.toLowerCase())
   );
 
+  // let author = switcheroo logic
+
     let inventoryCards = item => (
         <ItemCard>
         <Link to={`/item/${item.id}`}><img src={item.imagePath} /></Link>
@@ -53,6 +55,7 @@ class Home extends Component {
 
     return (
       <>
+
     <SortDiv>
         <form>
         <strong>Sort by</strong>{' '} 

@@ -7,12 +7,9 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      password: '',
-      itemsInWishList: [],
-      itemsForSale: [],
-      itemsInCart: [],
-    };
+      username: '',
+      password: '',     
+    }
   }
   handleUsernameChange = event => {
     console.log('new username: ', event.target.value);
@@ -38,6 +35,14 @@ class Signup extends Component {
     this.props.dispatch({
       type: 'LOGIN_SUCCESS',
       username: this.state.username,
+      password: this.state.password,
+      userProfile: {
+        name: this.state.username,
+        password: this.state.password,
+        itemsInWishList: [],
+        itemsForSale: [],
+        itemsInCart: [],
+      },
     });
   };
   render = () => {

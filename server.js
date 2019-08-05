@@ -20,23 +20,11 @@ const generateId = () => {
 
 //global variables
 const sessions = {};
-const userProfiles = [
-  {
-    name: 'Heather Martin',
-    password: '',
-    itemsInWishList: [2],
-    itemsForSale: [1, 3],
-    itemsInCart : [],
-  },
-  {
-    name: 'Hsiu-Jin Chan',
-    password: '67891',
-    itemsInWishList: [1],
-    itemsForSale: [3],
-    itemsInCart : [],
-  },
-];
 
+//let sourceFile = require('./userProfiles.js');
+let sourceArray = Object.values(require('./userProfiles.js'));
+let userProfiles = sourceArray[0];
+console.log('userProfiles: ', userProfiles);
 
 //Data Classes
 
@@ -98,11 +86,12 @@ app.post('/signup', upload.none(), (req, res) => {
   console.log('newUserProfile: ', newUserProfile);
   userProfiles.push(newUserProfile);
   console.log('userProfiles: ', userProfiles);
+  module.exports.userProfiles;
   const sessionId = generateId();
   console.log('generated id', sessionId);
   sessions[sessionId] = username;
   res.cookie('sid', sessionId);
-  res.send(JSON.stringify({ success: true }));
+  res.send(JSON.stringify({ success: true, userProfiles: userProfiles }));
 });
 
 app.post('/login', upload.none(), (req, res) => {
