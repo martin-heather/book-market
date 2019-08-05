@@ -1,9 +1,9 @@
 import { createStore } from 'redux';
-import { inventory } from '../data.js';
+import { inventory, userProfiles } from '../data.js';
 
 const initialState = {
   allInventory: [...inventory],
-  allUserProfiles: [],
+  allUserProfiles: [...userProfiles],
   loggedIn: false, 
   username: '',
   password: '',
@@ -33,12 +33,12 @@ function reducer(state = initialState, action) {
        let userObjArr = state.allUserProfiles.filter(user => user.name == state.username);
        let userObj = userObjArr[0];
        console.log(' userObj.itemsInCart: ',  userObj.itemsInCart);
-       userObj.itemsInCart.push(itemId);
+       userObj.itemsInCart = userObj.itemsInCart.concat([Number(itemId)]);
+       console.log(userObj.itemsInCart);
        console.log(userObj);
-       console.log(state.allUserProfiles);
       return {   
         ...state,
-        allUserProfiles: userObj
+        allUserProfiles: [userObj],
         };
     case 'SET_QUERY':
       return { ...state, query: action.query };

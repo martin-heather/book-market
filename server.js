@@ -20,11 +20,7 @@ const generateId = () => {
 
 //global variables
 const sessions = {};
-
-//let sourceFile = require('./userProfiles.js');
-let sourceArray = Object.values(require('./userProfiles.js'));
-let userProfiles = sourceArray[0];
-console.log('userProfiles: ', userProfiles);
+const userProfiles = [];
 
 //Data Classes
 
