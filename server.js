@@ -21,6 +21,7 @@ const generateId = () => {
 //global variables
 const sessions = {};
 const userProfiles = [];
+const inventory = [];
 
 //Data Classes
 
@@ -136,12 +137,25 @@ app.get('/item/:', (req, res) => {
 
 // Adding inventory
 
-app.post('/inventory', upload.none(), (req, res) => {
-  console.log('POST inventory body', req.body);
+app.post('/additem', upload.none(), (req, res) => {
+  console.log('*** new item');
+  console.log('POST new item body', req.body);
   const sessionId = req.cookies.sid;
-  const newItem = new Item(sessions[sessionId], req.body.inventory);
+  const username = sessions[sessionId];
+  console.log('username', username);
+  const id = generateId();
+  const title = req.body.title;
+  const author = req.body.author;
+  const language = req.body.language;
+  const category = req.body.category;
+  const price = req.body.price;
+  const desc = req.body.desc;
+  const imagePath = req.file ? `/public/images/${req.file.filename}` : '';
+  const newItem = new Item(id, title, author, desc, category, language, imagePath, price);
+  console.log('new item', newItem);
   inventory.push(newItem);
-  res.send(JSON.stringify({ success: true, inventory }));
+  console.log('inventory: ', inventory)
+  res.send(JSON.stringify({ success: true, newInventory: inventory }));
 });
 
 // Your endpoints go before this line

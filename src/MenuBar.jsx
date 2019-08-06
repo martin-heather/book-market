@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -15,17 +16,16 @@ const MenuWrapper = styled(Header)`
   `;
 
 function MenuBar(props) {
-    const { setLogout, handleQueryChange, query } = props;
+    const { setLogout } = props;
     return (
       <MenuWrapper>
         <Left>
           <MenuLink to="/">Home</MenuLink>
         </Left>
         <Right>
-        Search Books: <Input type="text" onChange={handleQueryChange} value={query} />
-          <MenuLink to="/">Sell a Book</MenuLink>
+          <MenuLink to="/additem">Sell a Book</MenuLink>
           <MenuLink to="/">Wish List</MenuLink>
-          <MenuLink to="/">Shopping Cart</MenuLink>
+          <MenuLink to="/shoppingcart">Shopping Cart</MenuLink>
           <MenuLink to="/" onClick={setLogout}>Logout</MenuLink>
         </Right>
       </MenuWrapper>
@@ -37,18 +37,16 @@ function MenuBar(props) {
     dispatch({ type: 'LOGOUT' });
   }
 
-  const mapStateToProps = (state) => ({
-    query: state.query,
-  });
+  // const mapStateToProps = (state) => ({
+  //   query: state.query,
+  // });
 
   const mapDispatchToProps = (dispatch) => ({
     setLogout: () => handleLogout(dispatch),
-    handleQueryChange: (evt) =>
-      dispatch({ type: 'SET_QUERY', query: evt.target.value }),
   });
   
   export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   )(MenuBar);
 

@@ -9,11 +9,24 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import ItemDetails from './ItemDetails.jsx';
 import AddItemForm from './AddItemForm.jsx';
+import ShoppingCart from './ShoppingCart.jsx';
 
 import styled from 'styled-components';
+import { Left, Right } from './StyledComponents/Divs.jsx';
+import { Button, GhostButton, Input } from './StyledComponents/Buttons.jsx';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
-import { Button, GhostButton, Input } from './StyledComponents/Buttons.jsx';
+
+const FindWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  `;
+
+const SearchDiv = styled.div`
+  text-align: left;
+  font-size: 0.75rem;
+  color: rgba(0, 44, 89, 1);
+`;
 
 const SortDiv = styled.div`
   text-align: right;
@@ -29,6 +42,18 @@ class Home extends Component {
         };
       };
 
+      // componentDidMount() {
+      //   this.updateInventory();
+      // }
+
+      // updateInventory = async () => {
+      //   const response = await fetch('/inventory');
+      //   const body = await response.json();
+      //   if (body.success) {
+      //     this.props.dispatch({ type: 'UPDATE_INVENTORY', inventory: body.inventory });
+      //   } 
+      // };
+
   handleSortChange = (evt) => {
     this.setState({ sortBy: evt.target.value });
     console.log(this.state);
@@ -39,10 +64,8 @@ class Home extends Component {
     item.title.toLowerCase().includes(this.props.query.toLowerCase())
   );
 
-  // let author = switcheroo logic
-
     let inventoryCards = item => (
-        <ItemCard>
+        <ItemCard key={item.id}>
         <Link to={`/item/${item.id}`}><img src={item.imagePath} /></Link>
         <div><strong>{item.title}</strong></div>
         <div>by{' '}{item.author.split(",").reverse().join(' ')}</div>        
@@ -55,8 +78,14 @@ class Home extends Component {
 
     return (
       <>
-
-    <SortDiv>
+      <FindWrapper>
+      <Left>
+        <SearchDiv>
+        <strong>Search Books: </strong><input type="text" onChange={this.props.handleQueryChange} value={this.props.query} />
+        </SearchDiv>
+      </Left>
+      <Right>
+      <SortDiv>
         <form>
         <strong>Sort by</strong>{' '} 
         <label>
@@ -64,21 +93,24 @@ class Home extends Component {
         onChange={this.handleSortChange}
         value={this.state.sortBy}>
           <option default disabled hidden>Select One</option>
-          <option>Author Name</option>
+          <option>Author</option>
           <option>Price</option>
           <option>Newest First</option>            
         </select>
       </label>
-{' '}
-      <GhostButton className="form-button">
-      Submit
-    </GhostButton>
+       {' '}
+       <button className="form-button">
+       Submit
+     </button>
                 </form>
-      </SortDiv> 
+      </SortDiv>
+      </Right> 
+      </FindWrapper>    
 
     <div className='ItemCards'>  
           {searchResults.map(inventoryCards)}
       </div>
+
 
       </>
     );
@@ -98,13 +130,26 @@ renderItemDetails = routerData => {
       <ItemDetails itemObject={itemObject} />
       );
 }
+
+renderShoppingCart = routerData => {
+    return ( 
+      <ShoppingCart />
+      );
+}
+
+renderAddItem = routerData => {
+  return ( 
+    <AddItemForm />
+    );
+}
     
 render () {
   return ( 
     <>   
       <Route exact={true} path='/' render={this.renderHome} />
       <Route exact={true} path='/item/:id' render={this.renderItemDetails} />
-      <Route exact={true} path='/addinventory' render={this.renderAddInventory} />
+      <Route exact={true} path='/shoppingcart' render={this.renderShoppingCart} />
+      <Route exact={true} path='/additem' render={this.renderAddItem} />
     </>  
     );
   };
@@ -115,6 +160,13 @@ const mapStateToProps = (state, props) => {
   return { 
     inventory: state.allInventory,  
     lgin: state.loggedIn,
-  query: state.query };
+    query: state.query };
 };
-export default connect(mapStateToProps)(Home);
+
+const mapDispatchToProps = (dispatch) => ({
+  handleQueryChange: (evt) =>
+    dispatch({ type: 'SET_QUERY', query: evt.target.value }),
+});
+
+export default connect(mapStateToProps,
+  mapDispatchToProps)(Home);

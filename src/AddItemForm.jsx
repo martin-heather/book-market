@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import styled from 'styled-components';
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
 import { Header } from './StyledComponents/Header.jsx';
@@ -13,32 +14,75 @@ const FormHeader = styled(Header)`
 `;
 
 class AddItemForm extends Component {
-  handleUpdateItem = (field, value) => {
-            this.props.handleAddBook(
-            { ...this.props.item, [field]: value,  timeAdded: Date.now()}
-    );
+  constructor(props) {
+    super(props);
+    this.state = { 
+      title: '', 
+      author: '',  
+      desc: '', 
+      language: '', 
+      category: '', 
+      price: '',  
+      imagePath: null 
+    };
   };
+
+  handleSubmit = async evt => {
+    evt.preventDefault();
+    console.log('form submitted');
+    let data = new FormData();
+    data.append('title', this.state.title);
+    data.append('author', this.state.author);
+    data.append('desc', this.state.desc);
+    data.append('language', this.state.language);
+    data.append('category', this.state.category);
+    data.append('price', this.state.price);
+    data.append('imagePath', this.state.image);
+    const response = await fetch('/additem', {
+      method: 'POST',
+      body: data,
+      credentials: 'same-origin',
+    });
+    const body = await response.json();
+    if (!body.success) return alert(body.message);
+    this.props.dispatch({
+      type: 'UPDATE_INVENTORY',
+      username: this.state.username,
+      password: this.state.password,
+      newItem: {
+        title: this.state.title,
+        author: this.state.author,
+        desc: this.state.desc,
+        language: this.state.language,
+        category: this.state.category,
+        price: this.state.price,
+        imagePath: this.state.imagePath,
+      },
+    });
+  };
+
   handleTitle = (evt) => {
-    this.handleUpdateItem('title', evt.target.value);
+    this.setState({title: evt.target.value});
   };
   handleAuthor = (evt) => {
-    this.handleUpdateItem('author', evt.target.value);
+    this.setState({author: evt.target.value});
   };
   handleDesc = (evt) => {
-    this.handleUpdateItem('desc', evt.target.value);
+    this.setState({desc: evt.target.value});
   };
   handleLanguage = (evt) => {
-    this.handleUpdateItem('language', evt.target.value);
+    this.setState({language: evt.target.value});
   };
   handleCategory = (evt) => {
-    this.handleUpdateItem('category', evt.target.value);
+    this.setState({category: evt.target.value});
   };
   handlePrice = (evt) => {
-    this.handleUpdateItem('category', evt.target.value);
+    this.setState({price: evt.target.value});
   };
   handleImagePath = (evt) => {
-    this.handleUpdateItem('imagePath', evt.target.value);
+    this.setState({ imagePath: event.target.files[0] });
   };
+
 
   render() {
     return (
@@ -46,13 +90,14 @@ class AddItemForm extends Component {
 <FormHeader>
     Sell a Book
 </FormHeader>
+<form onSubmit={this.handleSubmit}>
         <label>
           Title{' '}
           <input
             required
             type="text"
             onChange={this.handleTitle}
-            value={this.props.title}
+            value={this.state.title}
           />
         </label><br/>
         <label>
@@ -61,7 +106,42 @@ class AddItemForm extends Component {
             required
             type="text"
             onChange={this.handleAuthor}
-            value={this.props.author}
+            value={this.state.author}
+          />
+        </label><br/>        
+        <label>
+          Language{' '}
+          <input
+            required
+            type="text"
+            onChange={this.handleLanguage}
+            value={this.state.language}
+          />
+        </label><br/>
+        <label>
+          Category{' '}
+          <input
+            required
+            type="text"
+            onChange={this.handleCategory}
+            value={this.state.category}
+          />
+        </label><br/>
+        <label>
+          Price{' '}
+          <input
+            required
+            type="text"
+            onChange={this.handlePrice}
+            value={this.state.price}
+          />
+        </label><br/>
+        <label>
+          Image{' '}
+          <input
+            required
+            type="file"
+            onChange={this.handleImagePath}
           />
         </label><br/>
         <label>
@@ -72,58 +152,12 @@ class AddItemForm extends Component {
             onChange={this.handleDesc}
             value={this.props.desc}
           />
-        </label><br/>
-        <label>
-          Language{' '}
-          <input
-            required
-            type="text"
-            onChange={this.handleLanguage}
-            value={this.props.language}
-          />
-        </label><br/>
-        <label>
-          Category{' '}
-          <input
-            required
-            type="text"
-            onChange={this.handleCategory}
-            value={this.props.category}
-          />
-        </label><br/>
-        <label>
-          Price{' '}
-          <input
-            required
-            type="text"
-            onChange={this.handlePrice}
-            value={this.props.price}
-          />
-        </label><br/>
-        <label>
-          Image{' '}
-          <input
-            required
-            type="text"
-            onChange={this.handleImagePath}
-            value={this.props.imagePath}
-          />
-        </label>
-        <button>Add Book to Inventory</button>       
+          </label>
+        <button>Add Book to Inventory</button> 
+        </form>      
       </AddItemWrapper>
     );
   }
 }
 
-
-
-const mapDispatchToProps = (dispatch) => ({
-  handleAddBook: () =>
-    dispatch({ type: 'ADD_BOOk' }),
-  
-});
-
-export default connect(
-
-  mapDispatchToProps
-)(AddItemForm);
+export default connect()(AddItemForm);

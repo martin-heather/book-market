@@ -24,7 +24,7 @@ function reducer(state = initialState, action) {
      case 'UPDATE_INVENTORY':
       return {
         ...state,
-        allInventory: action.inventory,
+        allInventory: [...inventory, action.newItem],
         };
       case 'UPDATE_CART':
        let itemId = action.itemForCart;       
