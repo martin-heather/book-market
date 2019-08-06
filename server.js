@@ -137,7 +137,7 @@ app.get('/item/:', (req, res) => {
 
 // Adding inventory
 
-app.post('/additem', upload.none(), (req, res) => {
+app.post('/additem', upload.single('img'), (req, res) => {
   console.log('*** new item');
   console.log('POST new item body', req.body);
   const sessionId = req.cookies.sid;

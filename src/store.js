@@ -22,9 +22,10 @@ function reducer(state = initialState, action) {
     case 'LOGOUT':
       return { ...state, loggedIn: false, username: '' };
      case 'UPDATE_INVENTORY':
+       console.log('action.newInventory: ', action.newInventory);
       return {
         ...state,
-        allInventory: [...inventory, action.newItem],
+        allInventory: [...inventory].concat(action.newInventory), 
         };
       case 'UPDATE_CART':
        let itemId = action.itemForCart;       

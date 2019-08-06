@@ -45,21 +45,15 @@ class AddItemForm extends Component {
     });
     const body = await response.json();
     if (!body.success) return alert(body.message);
-    this.props.dispatch({
-      type: 'UPDATE_INVENTORY',
-      username: this.state.username,
-      password: this.state.password,
-      newItem: {
-        title: this.state.title,
-        author: this.state.author,
-        desc: this.state.desc,
-        language: this.state.language,
-        category: this.state.category,
-        price: this.state.price,
-        imagePath: this.state.imagePath,
-      },
-    });
+    
+    const response2 = await fetch('/inventory');
+    const body2 = await response2.json();
+      if (body2.success) {
+      this.props.dispatch({ type: 'UPDATE_INVENTORY', newInventory: body2.inventory });
+      } 
   };
+
+
 
   handleTitle = (evt) => {
     this.setState({title: evt.target.value});

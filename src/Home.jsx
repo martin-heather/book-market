@@ -42,17 +42,17 @@ class Home extends Component {
         };
       };
 
-      // componentDidMount() {
-      //   this.updateInventory();
-      // }
+  // componentDidMount() {
+  //   this.updateInventory();
+  // }
 
-      // updateInventory = async () => {
-      //   const response = await fetch('/inventory');
-      //   const body = await response.json();
-      //   if (body.success) {
-      //     this.props.dispatch({ type: 'UPDATE_INVENTORY', inventory: body.inventory });
-      //   } 
-      // };
+  // updateInventory = async () => {
+  //   const response = await fetch('/inventory');
+  //   const body = await response.json();
+  //     if (body.success) {
+  //     this.props.dispatch({ type: 'UPDATE_INVENTORY', newInventory: body.inventory });
+  //     } 
+  // };
 
   handleSortChange = (evt) => {
     this.setState({ sortBy: evt.target.value });
