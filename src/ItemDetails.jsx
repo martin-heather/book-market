@@ -14,8 +14,6 @@ const Desc = styled.div`
 class ItemDetails extends Component {
   constructor(props) {
     super(props);
-
-
 };
 
 addToCart = event => {
@@ -40,8 +38,7 @@ render = () => {
         return ( 
       <ItemDetailCard>
         <DetailDiv>
-          <img src={item.imagePath} />
-          
+          <img src={item.imagePath} />          
         </DetailDiv>
         <DetailDiv >
         <div><strong>{item.title}</strong></div>

@@ -33,8 +33,6 @@ const WideDiv = styled.div`
 class ShoppingCart extends Component {
   constructor(props) {
     super(props);
-
-
 };
 
 populateUserCart = () => {
@@ -46,31 +44,24 @@ populateUserCart = () => {
         const userProfile = this.props.userProfiles[0];
         console.log(userProfile.itemsInCart);
         const bookIds = userProfile.itemsInCart;
-        //rework logic
         const booksInCart = bookIds.map(id => this.props.inventory.filter(book => book.id === id)[0]);
         console.log(booksInCart);
-        return booksInCart.map(item => 
-          <>
-            
-              <CartItem>
+        return booksInCart.map(item =>     
+              <CartItem key={item.id}>
                 <Link to={`/item/${item.id}`}><CartImage src={item.imagePath} /></Link>
                 <Desc>
                   <div><strong>{item.title}</strong></div>
                   <div>by{' '}{item.author.split(",").reverse().join(' ')}</div>        
-                  <div>${item.price}</div>                          
+                  <div>${item.price}</div>                   
                 </Desc>
               </CartItem>
-              
-          
-          </>
         ); 
     };   
 };
 
 render = () => {  
   let item = this.props.itemObject;
-        return ( 
-          
+    return (           
       <ItemDetailCard>
         <ItemCard>
           {this.props.userProfiles[0].itemsInCart.length > 0 ? this.populateUserCart() : 'You haven\'t added anything to your cart yet.'}
@@ -78,9 +69,8 @@ render = () => {
           <WideDiv>
           <Button>Proceed to Checkout</Button>
           </WideDiv>
-      </ItemDetailCard>  
-      
-      );
+      </ItemDetailCard>        
+      );        
   };
 };
 

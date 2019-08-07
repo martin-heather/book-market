@@ -23,7 +23,7 @@ class AddItemForm extends Component {
       language: '', 
       category: '', 
       price: '',  
-      imagePath: null 
+      imagePath: '', 
     };
   };
 
@@ -37,7 +37,7 @@ class AddItemForm extends Component {
     data.append('language', this.state.language);
     data.append('category', this.state.category);
     data.append('price', this.state.price);
-    data.append('imagePath', this.state.image);
+    data.append('image', this.state.image);
     const response = await fetch('/additem', {
       method: 'POST',
       body: data,
@@ -74,7 +74,7 @@ class AddItemForm extends Component {
     this.setState({price: evt.target.value});
   };
   handleImagePath = (evt) => {
-    this.setState({ imagePath: event.target.files[0] });
+    this.setState({ image: event.target.files[0] });
   };
 
 
@@ -144,7 +144,7 @@ class AddItemForm extends Component {
             required
             type="text"
             onChange={this.handleDesc}
-            value={this.props.desc}
+            value={this.state.desc}
           />
           </label>
         <button>Add Book to Inventory</button> 
