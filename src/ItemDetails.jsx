@@ -30,11 +30,8 @@ class ItemDetails extends Component {
     event.preventDefault();
     console.log('add to cart: ', event.target.value);
     console.log('shopper: ', this.props.username);
-
-    this.props.dispatch({
-      type: 'UPDATE_CART',
-      itemForCart: event.target.value,
-    });
+    // this.setState({ addToCart: event.target.value })
+    this.props.handleAddToCart(event.target.value);
   };
 
   addToWishList = event => {
@@ -94,6 +91,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   handleLoadInventory: body =>
     dispatch({ type: 'LOAD_INVENTORY', inventory: body.inventory }),
+  handleAddToCart: cartItem =>
+    dispatch({
+      type: 'UPDATE_CART',
+      itemForCart: cartItem,
+    }),
 });
 
 export default connect(
