@@ -251,7 +251,6 @@ app.post('/signup', upload.none(), (req, res) => {
   const newUserProfile = new UserProfile(username, enteredPassword, [], [], []);
   userProfiles.push(newUserProfile);
   console.log('userProfiles: ', userProfiles);
-  //module.exports.userProfiles;
   const sessionId = generateId();
   console.log('generated id', sessionId);
   sessions[sessionId] = username;
@@ -303,12 +302,12 @@ app.get('/inventory', (req, res) => {
 app.get('/item/:', (req, res) => {
   console.log('Sending back the item detail');
   console.log(req.body);
-  // const sessionId = req.cookies.sid;
-  // if (!sessions[sessionId]) {
-  //   return res.send(
-  //     JSON.stringify({ success: false, message: 'Invalid session' })
-  //   );
-  // }
+  const sessionId = req.cookies.sid;
+  if (!sessions[sessionId]) {
+    return res.send(
+      JSON.stringify({ success: false, message: 'Invalid session' })
+    );
+  }
   res.send(JSON.stringify({ success: true, inventory }));
 });
 

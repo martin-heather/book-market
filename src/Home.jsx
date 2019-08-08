@@ -42,11 +42,10 @@ class Home extends Component {
 
   handleSortChange = evt => {
     this.setState({ sortBy: evt.target.value });
-    console.log(this.state);
   };
 
   render() {
-    console.log(this.props);
+    console.log('this.props: ', this.props);
     const searchResults = this.props.inventory.filter(item =>
       item.title.toLowerCase().includes(this.props.query.toLowerCase())
     );
@@ -116,9 +115,10 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = state => {
   return {
     inventory: state.allInventory,
+    userProfiles: state.allUserProfiles,
     lgin: state.loggedIn,
     query: state.query,
   };

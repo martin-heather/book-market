@@ -47,7 +47,7 @@ class App extends Component {
   renderItemDetails = routerData => {
     let itemId = routerData.match.params.id;
     console.log('itemId: ', itemId);
-    console.log(this.props.inventory);
+    console.log('inventory on render: ', this.props.inventory);
 
     let itemObject = this.props.inventory.find(item => item.id == itemId);
     console.log('itemObject: ', itemObject);
@@ -97,4 +97,5 @@ class App extends Component {
 const mapStateToProps = state => {
   return { lgin: state.loggedIn, inventory: state.allInventory };
 };
+
 export default connect(mapStateToProps)(App);

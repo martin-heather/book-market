@@ -20,28 +20,24 @@ function reducer(state = initialState, action) {
     case 'LOGOUT':
       return { ...state, loggedIn: false, username: '' };
     case 'LOAD_INVENTORY':
-      console.log(action.inventory);
+      console.log(state, action);
       return {
         ...state,
         allInventory: action.inventory,
       };
     case 'UPDATE_INVENTORY':
-      console.log('action.newInventory: ', action.newInventory);
       return {
         ...state,
         allInventory: [action.newItem],
       };
     case 'UPDATE_CART':
       let itemId = action.itemForCart;
-      console.log(itemId);
-      console.log(state.allUserProfiles);
       let userObjArr = state.allUserProfiles.filter(
         user => user.name == state.username
       );
       let userObj = userObjArr[0];
-      console.log(' userObj.itemsInCart: ', userObj.itemsInCart);
       userObj.itemsInCart = userObj.itemsInCart.concat([Number(itemId)]);
-      console.log(userObj.itemsInCart);
+      console.log(' userObj.itemsInCart: ', userObj.itemsInCart);
       console.log(userObj);
       return {
         ...state,

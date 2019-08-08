@@ -15,8 +15,15 @@ const Desc = styled.div`
 `;
 
 class ItemDetails extends Component {
-  constructor(props) {
-    super(props);
+  state = { loading: true };
+
+  async componentDidMount() {
+    const response = await fetch('/inventory');
+    const body = await response.json();
+    if (body.success) {
+      this.props.handleLoadInventory(body); //1st inventory then loading.
+      this.setState({ loading: false });
+    }
   }
 
   addToCart = event => {
@@ -34,9 +41,15 @@ class ItemDetails extends Component {
     event.preventDefault();
     console.log('add to wish list: ', event.target.value);
     this.setState({ itemForWishList: event.target.value });
+    console.log(this.state.itemForWishList);
   };
 
   render = () => {
+    console.log('this.state: ', this.state);
+    if (this.state.loading) {
+      return 'loading';
+    }
+    console.log('this.props: ', this.props);
     console.log(this.props.itemObject);
     let item = this.props.itemObject;
     return (
@@ -69,7 +82,7 @@ class ItemDetails extends Component {
   };
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = state => {
   return {
     inventory: state.allInventory,
     userProfiles: state.allUserProfiles,
@@ -78,4 +91,12 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps)(ItemDetails);
+const mapDispatchToProps = dispatch => ({
+  handleLoadInventory: body =>
+    dispatch({ type: 'LOAD_INVENTORY', inventory: body.inventory }),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ItemDetails);
