@@ -28,7 +28,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortBy: '',
+      sortBy: 'Default',
     };
   }
 
@@ -40,8 +40,21 @@ class Home extends Component {
     }
   }
 
-  handleSortChange = evt => {
+  handleSortByAuthor = evt => {
     this.setState({ sortBy: evt.target.value });
+    if (this.state.sortBy === 'Author') {
+      //ALPHA BY AUTHOR:
+      // const alphabeticAuthorArray = inventory.map(item => item.author).sort();
+      // const booksByAuthor = alphabeticAuthorArray.map(author => inventory.filter(book => book.author == author)[0]);
+    } else if (this.state.sortBy === 'Price') {
+      //CHEAPEST 1ST:
+      // const priceArray = inventory.map(item => item.price).sort(function(a, b){return a - b});
+      // const booksByPrice = priceArray.map(price => inventory.filter(book => book.price == price)[0]);
+    } else if (this.state.sortBy === 'Newest First') {
+      //MOST RECENT:
+      // const reverseChronologicalArray = inventory.map(item => item.timeAdded).sort(function(a, b){return b - a})
+      // const booksByRecentness = reverseChronologicalArray.map(timeAdded => inventory.filter(book => book.timeAdded == timeAdded)[0]);
+    }
   };
 
   render() {

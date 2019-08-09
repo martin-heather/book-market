@@ -91,7 +91,15 @@ class ItemDetails extends Component {
           <GhostButton onClick={this.addToWishList} value={item.id}>
             Add to Wish List
           </GhostButton>
-          <Desc>{item.desc}</Desc>
+          <Desc>
+            {item.desc}
+            <br />
+            <br />
+            <div>
+              <strong>Seller: </strong>
+              {item.seller}
+            </div>
+          </Desc>
         </DetailDiv>
       </ItemDetailCard>
     );

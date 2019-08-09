@@ -34,6 +34,7 @@ const inventory = [
     imagePath: '/images/sapiens.jpg',
     price: 23.99,
     timeAdded: 1564529906987,
+    seller: 'Heather Martin',
   },
   {
     id: 2,
@@ -46,6 +47,7 @@ const inventory = [
     imagePath: '/images/ironie.jpg',
     price: 17.99,
     timeAdded: 1564529938516,
+    seller: 'Hsiu-Jin Chan',
   },
   {
     id: 3,
@@ -58,6 +60,7 @@ const inventory = [
     imagePath: '/images/dreadnought.jpg',
     price: 15.99,
     timeAdded: 1564529965305,
+    seller: 'Samer Ahmed',
   },
   {
     id: 4,
@@ -70,6 +73,7 @@ const inventory = [
     imagePath: '/images/avalee.jpg',
     price: 14.99,
     timeAdded: 1564676760422,
+    seller: 'Christie Kotsopoulos',
   },
   {
     id: 5,
@@ -82,6 +86,7 @@ const inventory = [
     imagePath: '/images/besoin.jpg',
     price: 24.99,
     timeAdded: 1564676760445,
+    seller: 'Daniel Robineau',
   },
   {
     id: 6,
@@ -94,6 +99,7 @@ const inventory = [
     imagePath: '/images/menagerie.jpg',
     price: 21.99,
     timeAdded: 1564676760512,
+    seller: 'Heather Martin',
   },
   {
     id: 7,
@@ -106,6 +112,7 @@ const inventory = [
     imagePath: '/images/robber.jpg',
     price: 14.99,
     timeAdded: 1564676760523,
+    seller: 'Hsiu-Jin Chan',
   },
   {
     id: 8,
@@ -118,6 +125,7 @@ const inventory = [
     imagePath: '/images/hiver.jpg',
     price: 6.99,
     timeAdded: 1564676760534,
+    seller: 'Samer Ahmed',
   },
   {
     id: 9,
@@ -130,6 +138,7 @@ const inventory = [
     imagePath: '/images/bread.jpg',
     price: 18.99,
     timeAdded: 1564676760545,
+    seller: 'Christie Kotsopoulos',
   },
   {
     id: 10,
@@ -142,6 +151,7 @@ const inventory = [
     imagePath: '/images/gender.jpg',
     price: 22.99,
     timeAdded: 1564676760556,
+    seller: 'Daniel Robineau',
   },
   {
     id: 11,
@@ -154,6 +164,7 @@ const inventory = [
     imagePath: '/images/impurete.jpg',
     price: 13.99,
     timeAdded: 1564676760567,
+    seller: 'Heather Martin',
   },
   {
     id: 12,
@@ -166,6 +177,7 @@ const inventory = [
     imagePath: '/images/aurores.jpg',
     price: 15.99,
     timeAdded: 1564676760567,
+    seller: 'Hsiu-Jin Chan',
   },
   {
     id: 13,
@@ -178,6 +190,7 @@ const inventory = [
     imagePath: '/images/riddle.jpg',
     price: 17.99,
     timeAdded: 1564676760578,
+    seller: 'Samer Ahmed',
   },
   {
     id: 14,
@@ -190,13 +203,24 @@ const inventory = [
     imagePath: '/images/ru.jpg',
     price: 11.99,
     timeAdded: 1564676760589,
+    seller: 'Christie Kotsopoulos',
   },
 ];
 
 //Data Classes
 
 class Item {
-  constructor(id, title, author, desc, category, language, imagePath, price) {
+  constructor(
+    id,
+    title,
+    author,
+    desc,
+    category,
+    language,
+    imagePath,
+    price,
+    seller
+  ) {
     this.id = id;
     this.title = title;
     this.author = author;
@@ -205,6 +229,7 @@ class Item {
     this.language = language;
     this.imagePath = imagePath;
     this.price = price;
+    this.seller = seller;
     this.timeAdded = Date.now();
   }
 }
@@ -339,6 +364,7 @@ app.post('/additem', upload.single('image'), (req, res) => {
   const category = req.body.category;
   const price = req.body.price;
   const desc = req.body.desc;
+  const seller = username;
   const imagePath = req.file ? `/images/${req.file.filename}` : '';
   const newItem = new Item(
     id,
@@ -348,7 +374,8 @@ app.post('/additem', upload.single('image'), (req, res) => {
     category,
     language,
     imagePath,
-    price
+    price,
+    seller
   );
   console.log('new item', newItem);
   inventory.push(newItem);
