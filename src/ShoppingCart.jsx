@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import TakeMoney from './Payment.jsx';
+
 import styled from 'styled-components';
 import {
   ItemDetailCard,
@@ -95,6 +97,7 @@ class ShoppingCart extends Component {
         </ItemCard>
         <WideDiv>
           <Button>Proceed to Checkout</Button>
+          <TakeMoney />
         </WideDiv>
       </ItemDetailCard>
     );

@@ -295,6 +295,7 @@ app.post('/login', upload.none(), (req, res) => {
 app.post('/logout', (req, res) => {
   const sessionId = req.cookies.sid;
   delete sessions[sessionId];
+  itemsInCart.length = 0;
   res.send(JSON.stringify({ success: true }));
 });
 
@@ -355,7 +356,7 @@ app.post('/additem', upload.single('image'), (req, res) => {
   res.send(JSON.stringify({ success: true, newInventory: inventory }));
 });
 
-//Shopping Cart
+//Shopping Cart & Checkout
 
 app.get('/shoppingcart', (req, res) => {
   console.log('Sending back the items in Cart');
@@ -381,6 +382,17 @@ app.post('/addtocart', upload.none(), (req, res) => {
     );
   }
   res.send(JSON.stringify({ success: true, itemsInCart }));
+});
+
+app.post('/save-stripe-token', upload.none(), (req, res) => {
+  let token = req.body.stripeToken;
+  let amount = req.body.amount;
+  stripe.charges.create({
+    amount: amount,
+    currency: 'CAD',
+    description: '',
+    source: token,
+  });
 });
 
 // Your endpoints go before this line

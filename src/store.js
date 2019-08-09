@@ -20,7 +20,7 @@ function reducer(state = initialState, action) {
         username: action.username,
       };
     case 'LOGOUT':
-      return { ...state, loggedIn: false, username: '' };
+      return { ...state, loggedIn: false, username: '', itemsInCart: [] };
     case 'LOAD_USERS':
       console.log('state: ', state, 'action: ', action);
       return {
