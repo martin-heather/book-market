@@ -3,14 +3,16 @@ import { createStore } from 'redux';
 const initialState = {
   allInventory: [],
   allUserProfiles: [],
-  loggedIn: false, //document.cookie
+  loggedIn: false, //document.cookie?
   username: '',
   query: '',
+  itemsInCart: [],
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
+      console.log(action);
       return {
         ...state,
         loggedIn: true,
@@ -19,6 +21,12 @@ function reducer(state = initialState, action) {
       };
     case 'LOGOUT':
       return { ...state, loggedIn: false, username: '' };
+    case 'LOAD_USERS':
+      console.log('state: ', state, 'action: ', action);
+      return {
+        ...state,
+        allUserProfiles: action.userProfiles,
+      };
     case 'LOAD_INVENTORY':
       console.log(state, action);
       return {
@@ -30,18 +38,18 @@ function reducer(state = initialState, action) {
         ...state,
         allInventory: [action.newItem],
       };
-    case 'UPDATE_CART':
-      let itemId = action.itemForCart;
-      let userObjArr = state.allUserProfiles.filter(
-        user => user.name == state.username
-      );
-      let userObj = userObjArr[0];
-      userObj.itemsInCart = userObj.itemsInCart.concat([Number(itemId)]);
-      console.log(' userObj.itemsInCart: ', userObj.itemsInCart);
-      console.log(userObj);
+    case 'LOAD_CART':
+      console.log('state: ', state, 'action: ', action);
+      let item = Number(action.itemsInCart);
       return {
         ...state,
-        allUserProfiles: [userObj],
+        itemsInCart: action.itemsInCart,
+      };
+    case 'UPDATE_CART':
+      let itemId = Number(action.itemForCart);
+      return {
+        ...state,
+        itemsInCart: state.itemsInCart.concat([itemId]),
       };
     case 'SET_QUERY':
       return { ...state, query: action.query };

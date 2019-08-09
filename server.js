@@ -21,6 +21,7 @@ const generateId = () => {
 //global variables
 const sessions = {};
 const userProfiles = [];
+const itemsInCart = [];
 const inventory = [
   {
     id: 1,
@@ -236,6 +237,17 @@ app.get('/session', (req, res) => {
   res.send(JSON.stringify({ success: false }));
 });
 
+app.get('/userprofiles', (req, res) => {
+  console.log('Sending back the userProfiles');
+  const sessionId = req.cookies.sid;
+  if (!sessions[sessionId]) {
+    return res.send(
+      JSON.stringify({ success: false, message: 'Invalid session' })
+    );
+  }
+  res.send(JSON.stringify({ success: true, userProfiles }));
+});
+
 app.post('/signup', upload.none(), (req, res) => {
   console.log('**** Signup endpoint');
   console.log('this is the body', req.body);
@@ -341,6 +353,34 @@ app.post('/additem', upload.single('image'), (req, res) => {
   inventory.push(newItem);
   console.log('inventory: ', inventory);
   res.send(JSON.stringify({ success: true, newInventory: inventory }));
+});
+
+//Shopping Cart
+
+app.get('/shoppingcart', (req, res) => {
+  console.log('Sending back the items in Cart');
+  const sessionId = req.cookies.sid;
+  if (!sessions[sessionId]) {
+    return res.send(
+      JSON.stringify({ success: false, message: 'Invalid session' })
+    );
+  }
+  res.send(JSON.stringify({ success: true, itemsInCart }));
+});
+
+app.post('/addtocart', upload.none(), (req, res) => {
+  console.log('*** item added to cart');
+  console.log('POST new item body', req.body);
+  const bookId = req.body.itemsInCart;
+  itemsInCart.push(bookId);
+  console.log('itemsInCart: ', itemsInCart);
+  const sessionId = req.cookies.sid;
+  if (!sessions[sessionId]) {
+    return res.send(
+      JSON.stringify({ success: false, message: 'Invalid session' })
+    );
+  }
+  res.send(JSON.stringify({ success: true, itemsInCart }));
 });
 
 // Your endpoints go before this line

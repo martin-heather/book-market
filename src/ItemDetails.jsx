@@ -15,7 +15,7 @@ const Desc = styled.div`
 `;
 
 class ItemDetails extends Component {
-  state = { loading: true };
+  state = { loading: true, itemsInCart: [] };
 
   async componentDidMount() {
     const response = await fetch('/inventory');
@@ -26,12 +26,29 @@ class ItemDetails extends Component {
     }
   }
 
-  addToCart = event => {
+  addToCart = async event => {
     event.preventDefault();
-    console.log('add to cart: ', event.target.value);
+    console.log('add to cart: ', this.state.itemsInCart);
     console.log('shopper: ', this.props.username);
-    // this.setState({ addToCart: event.target.value })
-    this.props.handleAddToCart(event.target.value);
+    let data = new FormData();
+    data.append('itemsInCart', this.state.itemsInCart);
+    const response = await fetch('/addtocart', {
+      method: 'POST',
+      body: data,
+      credentials: 'same-origin',
+    });
+    const body = await response.json();
+    if (!body.success) return alert(body.message);
+
+    const response2 = await fetch('/shoppingcart');
+    const body2 = await response2.json();
+    if (body2.success) {
+      this.props.handleAddToCart(body2.itemsInCart);
+    }
+  };
+
+  handleId = evt => {
+    this.setState({ itemsInCart: evt.target.value });
   };
 
   addToWishList = event => {
@@ -66,9 +83,11 @@ class ItemDetails extends Component {
               .join(' ')}
           </div>
           <div>${item.price}</div>
-          <Button onClick={this.addToCart} value={item.id}>
-            Add to Cart
-          </Button>{' '}
+          <form onSubmit={this.addToCart}>
+            <Button onClick={this.handleId} value={item.id}>
+              Add to Cart
+            </Button>
+          </form>{' '}
           <GhostButton onClick={this.addToWishList} value={item.id}>
             Add to Wish List
           </GhostButton>

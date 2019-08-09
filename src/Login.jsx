@@ -41,15 +41,20 @@ class Login extends Component {
     this.props.dispatch({
       type: 'LOGIN_SUCCESS',
       username: this.state.username,
+      userProfile: {
+        name: this.state.username,
+        password: this.state.password,
+        itemsInWishList: [],
+        itemsForSale: [],
+        itemsInCart: [],
+      },
     });
   };
   render = () => {
     return (
       <form onSubmit={this.handleSubmit}>
-        Username{' '}
-        <Input type="text" onChange={this.handleUsernameChange} />
-        Password{' '}
-        <Input type="text" onChange={this.handlePasswordChange} />
+        Username <Input type="text" onChange={this.handleUsernameChange} />
+        Password <Input type="password" onChange={this.handlePasswordChange} />
         <Button>submit</Button>
       </form>
     );
@@ -57,11 +62,10 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  return { 
-    userProfiles: state.userProfiles,  
-    lgin: state.loggedIn 
+  return {
+    userProfiles: state.userProfiles,
+    lgin: state.loggedIn,
   };
 };
 
 export default connect()(Login);
-

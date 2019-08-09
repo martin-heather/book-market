@@ -8,8 +8,8 @@ class Signup extends Component {
     super(props);
     this.state = {
       username: '',
-      password: '',     
-    }
+      password: '',
+    };
   }
   handleUsernameChange = event => {
     console.log('new username: ', event.target.value);
@@ -48,10 +48,8 @@ class Signup extends Component {
   render = () => {
     return (
       <form onSubmit={this.handleSubmit}>
-        Username{' '}
-        <Input type="text" onChange={this.handleUsernameChange} />
-        Password{' '}
-        <Input type="text" onChange={this.handlePasswordChange} />
+        Username <Input type="text" onChange={this.handleUsernameChange} />
+        Password <Input type="password" onChange={this.handlePasswordChange} />
         <Button>submit</Button>
       </form>
     );
