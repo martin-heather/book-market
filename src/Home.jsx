@@ -28,7 +28,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortBy: 'Default',
+      sortBy: 'default',
     };
   }
 
@@ -37,29 +37,60 @@ class Home extends Component {
     const body = await response.json();
     if (body.success) {
       this.props.handleLoadInventory(body);
+      console.log(body.inventory);
+      this.setState({ sortedInventory: body.inventory });
+      console.log(this.state.sortedInventory);
     }
   }
 
-  handleSortByAuthor = evt => {
+  handleSortBy = evt => {
     this.setState({ sortBy: evt.target.value });
-    if (this.state.sortBy === 'Author') {
-      //ALPHA BY AUTHOR:
-      // const alphabeticAuthorArray = inventory.map(item => item.author).sort();
-      // const booksByAuthor = alphabeticAuthorArray.map(author => inventory.filter(book => book.author == author)[0]);
-    } else if (this.state.sortBy === 'Price') {
-      //CHEAPEST 1ST:
-      // const priceArray = inventory.map(item => item.price).sort(function(a, b){return a - b});
-      // const booksByPrice = priceArray.map(price => inventory.filter(book => book.price == price)[0]);
-    } else if (this.state.sortBy === 'Newest First') {
-      //MOST RECENT:
-      // const reverseChronologicalArray = inventory.map(item => item.timeAdded).sort(function(a, b){return b - a})
-      // const booksByRecentness = reverseChronologicalArray.map(timeAdded => inventory.filter(book => book.timeAdded == timeAdded)[0]);
-    }
   };
+
+  renderSortedInventory(sortBy) {
+    if (sortBy === 'author') {
+      //ALPHA BY AUTHOR:
+      const alphabeticAuthorArray = this.props.inventory
+        .map(item => item.author)
+        .sort();
+      const booksByAuthor = alphabeticAuthorArray.map(
+        author => this.props.inventory.filter(book => book.author == author)[0]
+      );
+      return booksByAuthor;
+    } else if (sortBy === 'price') {
+      //CHEAPEST 1ST:
+      const priceArray = this.props.inventory
+        .map(item => item.price)
+        .sort(function(a, b) {
+          return a - b;
+        });
+      const booksByPrice = priceArray.map(
+        price => this.props.inventory.filter(book => book.price == price)[0]
+      );
+      return booksByPrice;
+    } else if (sortBy === 'newest') {
+      //MOST RECENT:
+      const reverseChronologicalArray = this.props.inventory
+        .map(item => item.timeAdded)
+        .sort(function(a, b) {
+          return b - a;
+        });
+      const booksByRecentness = reverseChronologicalArray.map(
+        timeAdded =>
+          this.props.inventory.filter(book => book.timeAdded == timeAdded)[0]
+      );
+      return booksByRecentness;
+    }
+  }
 
   render() {
     console.log('this.props: ', this.props);
-    const searchResults = this.props.inventory.filter(item =>
+    console.log('this.state: ', this.state);
+    const sortBy = this.state.sortBy;
+    const inventory =
+      this.renderSortedInventory(sortBy) || this.props.inventory;
+    console.log(inventory);
+    const searchResults = inventory.filter(item =>
       item.title.toLowerCase().includes(this.props.query.toLowerCase())
     );
 
@@ -100,24 +131,21 @@ class Home extends Component {
           </Left>
           <Right>
             <SortDiv>
-              <form>
-                <strong>Sort by</strong>{' '}
-                <label>
-                  <select
-                    type="text"
-                    onChange={this.handleSortChange}
-                    value={this.state.sortBy}
-                  >
-                    <option default disabled hidden>
-                      Select One
-                    </option>
-                    <option>Author</option>
-                    <option>Price</option>
-                    <option>Newest First</option>
-                  </select>
-                </label>{' '}
-                <button className="form-button">Submit</button>
-              </form>
+              <strong>Sort by</strong>{' '}
+              <label>
+                <select
+                  type="text"
+                  onChange={this.handleSortBy}
+                  value={this.state.sortBy}
+                >
+                  <option default hidden>
+                    Select One
+                  </option>
+                  <option value="author">Author</option>
+                  <option value="price">Price</option>
+                  <option value="newest">Newest First</option>
+                </select>
+              </label>{' '}
             </SortDiv>
           </Right>
         </FindWrapper>
