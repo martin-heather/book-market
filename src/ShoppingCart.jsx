@@ -42,7 +42,13 @@ class ShoppingCart extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('/shoppingcart');
+    const response2 = await fetch('/inventory');
+    const body2 = await response2.json();
+    if (body2.success) {
+      this.props.handleLoadInventory(body2); //1st inventory then loading
+    }
+
+    const response = await fetch('/API-shoppingcart');
     const body = await response.json();
     console.log('body.itemsInCart: ', body.itemsInCart);
     if (body.success) {
@@ -104,7 +110,7 @@ class ShoppingCart extends Component {
   };
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = state => {
   return {
     inventory: state.allInventory,
     userProfiles: state.allUserProfiles,
@@ -117,6 +123,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => ({
   handleLoadCart: body =>
     dispatch({ type: 'LOAD_CART', itemsInCart: body.itemsInCart }),
+  handleLoadInventory: body =>
+    dispatch({ type: 'LOAD_INVENTORY', inventory: body.inventory }),
 });
 
 export default connect(

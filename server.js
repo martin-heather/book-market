@@ -324,7 +324,7 @@ app.post('/logout', (req, res) => {
   res.send(JSON.stringify({ success: true }));
 });
 
-// Displaying inventory
+// Managing inventory
 
 app.get('/inventory', (req, res) => {
   console.log('Sending back the inventory');
@@ -348,8 +348,6 @@ app.get('/item/:', (req, res) => {
   }
   res.send(JSON.stringify({ success: true, inventory }));
 });
-
-// Adding inventory
 
 app.post('/additem', upload.single('image'), (req, res) => {
   console.log('*** new item');
@@ -385,8 +383,8 @@ app.post('/additem', upload.single('image'), (req, res) => {
 
 //Shopping Cart & Checkout
 
-app.get('/shoppingcart', (req, res) => {
-  console.log('Sending back the items in Cart');
+app.get('/API-shoppingcart', (req, res) => {
+  console.log('Sending back the items in Cart', req.headers);
   const sessionId = req.cookies.sid;
   if (!sessions[sessionId]) {
     return res.send(
@@ -412,6 +410,7 @@ app.post('/addtocart', upload.none(), (req, res) => {
 });
 
 app.post('/save-stripe-token', upload.none(), (req, res) => {
+  console.log('req.body: ', req.body);
   let token = req.body.stripeToken;
   let amount = req.body.amount;
   stripe.charges.create({

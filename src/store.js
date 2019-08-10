@@ -40,7 +40,6 @@ function reducer(state = initialState, action) {
       };
     case 'LOAD_CART':
       console.log('state: ', state, 'action: ', action);
-      let item = Number(action.itemsInCart);
       return {
         ...state,
         itemsInCart: action.itemsInCart,

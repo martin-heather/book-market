@@ -40,7 +40,7 @@ class ItemDetails extends Component {
     const body = await response.json();
     if (!body.success) return alert(body.message);
 
-    const response2 = await fetch('/shoppingcart');
+    const response2 = await fetch('/API-shoppingcart');
     const body2 = await response2.json();
     if (body2.success) {
       this.props.handleAddToCart(body2.itemsInCart);
