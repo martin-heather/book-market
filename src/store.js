@@ -7,6 +7,7 @@ const initialState = {
   username: '',
   query: '',
   itemsInCart: [],
+  signin: 'login',
 };
 
 function reducer(state = initialState, action) {

@@ -20,10 +20,7 @@ function FrontMenuBar(props) {
   const { setLogout } = props;
   return (
     <MenuWrapper>
-      <MenuLink to="/" />
-      <MenuLink to="/signup" onClick={setLogout}>
-        Sign Up
-      </MenuLink>
+      <div>&nbsp;</div>
     </MenuWrapper>
   );
 }

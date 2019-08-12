@@ -58,6 +58,37 @@ img {
   }
 }
 
+/* Log in buttons */
+
+.halfbutton {
+  margin: 10px auto;
+  font-family: 'Arbutus Slab', serif;
+  font-size: 0.75rem;
+  padding: 7px;
+  outline-width: 0;
+}
+
+.left {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.right {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.active {
+  background-color: #002c59;
+  color: #e4e4e4;
+  border: 1.5px solid #002c59;
+}
+
+.ghost {
+  background-color: #e4e4e4;
+  color: #002c59;
+  border: 1px solid #002c59;
+}
+/* End of Log in buttons */
+
 .ItemCards {
   display: flex;
   flex-wrap: wrap;

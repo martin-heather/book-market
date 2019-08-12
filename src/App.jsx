@@ -13,15 +13,11 @@ import AddItemForm from './AddItemForm.jsx';
 import ShoppingCart from './ShoppingCart.jsx';
 import ItemDetails from './ItemDetails.jsx';
 
-import styled from 'styled-components';
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
-
-const SmallText = styled.div`
-  font-size: 10px;
-`;
+import { Button, GhostButton } from './StyledComponents/Buttons.jsx';
 
 class App extends Component {
-  state = { loading: true };
+  state = { loading: true, signin: 'login' };
   async componentDidMount() {
     const response = await fetch('/session');
     const body = await response.json();
@@ -39,6 +35,10 @@ class App extends Component {
     }
   }
 
+  handleSignIn = evt => {
+    this.setState({ signin: evt.target.value });
+  };
+
   renderShoppingCart = () => {
     return <ShoppingCart />;
   };
@@ -49,10 +49,6 @@ class App extends Component {
 
   renderHome = () => {
     return <Home />;
-  };
-
-  renderSignup = () => {
-    return <Signup />;
   };
 
   renderItemDetails = routerData => {
@@ -92,17 +88,42 @@ class App extends Component {
         </div>
       );
     }
+
+    const signinButton = this.state.signin === 'signup' ? 'active' : 'ghost';
+    const loginButton = this.state.signin === 'login' ? 'active' : 'ghost';
+
     return (
       <div>
         <BrowserRouter>
           <FrontPageHeader />
           <FrontMenuBar />
           <FormWindow>
-            <h3>Login</h3>
-            <Login />
-            <SmallText>First Visit? Click here to sign up.</SmallText>
+            <button
+              onClick={this.handleSignIn}
+              className={`left halfbutton ${signinButton}`}
+              value="signup"
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={this.handleSignIn}
+              className={`right halfbutton ${loginButton}`}
+              value="login"
+            >
+              Log In
+            </button>
+            {this.state.signin === 'signup' ? (
+              <>
+                <h3>Sign Up</h3>
+                <Signup />
+              </>
+            ) : (
+              <>
+                <h3>Log In</h3>
+                <Login />
+              </>
+            )}
           </FormWindow>
-          <Route exact={true} path="/signup" render={this.renderSignup} />
         </BrowserRouter>
       </div>
     );
