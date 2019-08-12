@@ -1,6 +1,12 @@
+:root {
+  --paper-grey: #e4e4e4;
+  --dark-blue: #002c59;
+  --border-radius: 4px;
+}
+
 body {
   margin: 0;
-  background-color: #e4e4e4;
+  background-color: var(--paper-grey);
   background-image: url('../public/images/paper.jpg');
   background-repeat: repeat;
   background-position: center;
@@ -9,8 +15,8 @@ body {
 }
 
 html {
-    font-family: 'Arbutus Slab', serif;
-    font-size: 1.6rem;
+  font-family: 'Arbutus Slab', serif;
+  font-size: 1.6rem;
 }
 
 img {
@@ -18,8 +24,8 @@ img {
 }
 
 .Logo {
-    font-family: 'Fredericka the Great', serif;
-    font-size: 7rem;
+  font-family: 'Fredericka the Great', 'Arbutus Slab', serif;
+  font-size: 7rem;
 }
 
 .LogoShrinks {
@@ -34,14 +40,22 @@ img {
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes LogoShrinks {
-  from {font-size: 7rem;}
-  to {font-size: 4rem;}
+  from {
+    font-size: 7rem;
+  }
+  to {
+    font-size: 4rem;
+  }
 }
 
 /* Standard syntax */
 @keyframes LogoShrinks {
-  from {font-size: 7rem;}
-  to {font-size: 4rem;}
+  from {
+    font-size: 7rem;
+  }
+  to {
+    font-size: 4rem;
+  }
 }
 
 .ItemCards {
@@ -51,28 +65,31 @@ img {
 }
 
 .ItemCards div {
-  font-size: .75rem; 
+  font-size: 0.75rem;
 }
 
 .ItemCards img {
-  max-width: 120px; 
+  max-width: 120px;
 }
 
-/* .overlay {
+.overlay {
   z-index: 50;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.623);
 }
 
-.popup {
+/* .popup {
   z-index: 100;
   position: fixed;
-  top: 200px;
-  left: 200px;
-  right: 200px;
+  min-width: 400px;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  border-radius: var(--border-radius);
   background-color: white;
 } */

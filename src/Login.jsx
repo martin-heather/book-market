@@ -53,8 +53,13 @@ class Login extends Component {
   render = () => {
     return (
       <form onSubmit={this.handleSubmit}>
-        Username <Input type="text" onChange={this.handleUsernameChange} />
-        Password <Input type="password" onChange={this.handlePasswordChange} />
+        <p>
+          Username <Input type="text" onChange={this.handleUsernameChange} />
+        </p>
+        <p>
+          Password{' '}
+          <Input type="password" onChange={this.handlePasswordChange} />
+        </p>
         <Button>submit</Button>
       </form>
     );

@@ -13,9 +13,15 @@ import AddItemForm from './AddItemForm.jsx';
 import ShoppingCart from './ShoppingCart.jsx';
 import ItemDetails from './ItemDetails.jsx';
 
+import styled from 'styled-components';
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
 
+const SmallText = styled.div`
+  font-size: 10px;
+`;
+
 class App extends Component {
+  state = { loading: true };
   async componentDidMount() {
     const response = await fetch('/session');
     const body = await response.json();
@@ -29,6 +35,7 @@ class App extends Component {
         type: 'LOAD_INVENTORY',
         inventory: body2.inventory,
       });
+      this.setState({ loading: false });
     }
   }
 
@@ -44,6 +51,10 @@ class App extends Component {
     return <Home />;
   };
 
+  renderSignup = () => {
+    return <Signup />;
+  };
+
   renderItemDetails = routerData => {
     let itemId = routerData.match.params.id;
     console.log('itemId: ', itemId);
@@ -57,6 +68,9 @@ class App extends Component {
 
   render() {
     if (this.props.lgin) {
+      if (this.state.loading) {
+        return 'loading';
+      }
       return (
         <div>
           <BrowserRouter>
@@ -84,11 +98,11 @@ class App extends Component {
           <FrontPageHeader />
           <FrontMenuBar />
           <FormWindow>
-            <h3>Signup</h3>
-            <Signup />
             <h3>Login</h3>
             <Login />
+            <SmallText>First Visit? Click here to sign up.</SmallText>
           </FormWindow>
+          <Route exact={true} path="/signup" render={this.renderSignup} />
         </BrowserRouter>
       </div>
     );

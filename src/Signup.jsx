@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { FormWindow } from './StyledComponents/FormWindow.jsx';
 import { Button, Input } from './StyledComponents/Buttons.jsx';
 
 class Signup extends Component {
@@ -11,6 +12,25 @@ class Signup extends Component {
       password: '',
     };
   }
+
+  state = { loading: true };
+  async componentDidMount() {
+    const response = await fetch('/session');
+    const body = await response.json();
+    if (body.success) {
+      this.props.dispatch({ type: 'LOGIN_SUCCESS', username: body.username });
+    }
+    const response2 = await fetch('/inventory');
+    const body2 = await response2.json();
+    if (body2.success) {
+      this.props.dispatch({
+        type: 'LOAD_INVENTORY',
+        inventory: body2.inventory,
+      });
+      this.setState({ loading: false });
+    }
+  }
+
   handleUsernameChange = event => {
     console.log('new username: ', event.target.value);
     this.setState({ username: event.target.value });
@@ -47,13 +67,29 @@ class Signup extends Component {
   };
   render = () => {
     return (
-      <form onSubmit={this.handleSubmit}>
-        Username <Input type="text" onChange={this.handleUsernameChange} />
-        Password <Input type="password" onChange={this.handlePasswordChange} />
-        <Button>submit</Button>
-      </form>
+      <div className="overlay">
+        {' '}
+        <FormWindow>
+          <h3>Signup</h3>
+          <form onSubmit={this.handleSubmit}>
+            <p>
+              Username{' '}
+              <Input type="text" onChange={this.handleUsernameChange} />
+            </p>
+            <p>
+              Password{' '}
+              <Input type="password" onChange={this.handlePasswordChange} />
+            </p>
+            <Button>submit</Button>
+          </form>
+        </FormWindow>
+      </div>
     );
   };
 }
 
-export default connect()(Signup);
+const mapStateToProps = state => {
+  return { lgin: state.loggedIn, inventory: state.allInventory };
+};
+
+export default connect(mapStateToProps)(Signup);

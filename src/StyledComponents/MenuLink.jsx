@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const MenuLink = styled(Link)`
   padding: 10px;
-  color: #e4e4e4;
+  color: var(--paper-grey);
   text-decoration: none;
   text-shadow: 0px 0px 0px #4d7baa;
   transition: 0.3s;

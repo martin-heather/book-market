@@ -15,13 +15,13 @@ const FindWrapper = styled.div`
 const SearchDiv = styled.div`
   text-align: left;
   font-size: 0.75rem;
-  color: rgba(0, 44, 89, 1);
+  color: var(--dark-blue);
 `;
 
 const SortDiv = styled.div`
   text-align: right;
   font-size: 0.75rem;
-  color: rgba(0, 44, 89, 1);
+  color: var(--dark-blue);
 `;
 
 class Home extends Component {

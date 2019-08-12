@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Header = styled.div`
   text-align: center;
-  color: #e4e4e4;
-  font-size: .75rem;
+  color: var(--paper-grey);
+  font-size: 0.75rem;
   padding: 10px;
-  `;
+`;

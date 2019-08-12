@@ -9,29 +9,34 @@ import { MenuLink } from './StyledComponents/MenuLink.jsx';
 const MenuWrapper = styled(Header)`
   display: flex;
   justify-content: space-between;
-  background-image: linear-gradient(0deg, rgba(0, 44, 89, 1), rgba(0, 44, 89, 0.9));
-  `;
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 44, 89, 1),
+    rgba(0, 44, 89, 0.9)
+  );
+`;
 
 function FrontMenuBar(props) {
-    const { setLogout } = props;
-    return (
-      <MenuWrapper>
-          <MenuLink to="/">Home</MenuLink>
-          <MenuLink to="/" onClick={setLogout}>Login</MenuLink>
-      </MenuWrapper>
-    );
-  }
+  const { setLogout } = props;
+  return (
+    <MenuWrapper>
+      <MenuLink to="/" />
+      <MenuLink to="/signup" onClick={setLogout}>
+        Sign Up
+      </MenuLink>
+    </MenuWrapper>
+  );
+}
 
-  function handleLogout(dispatch) {
-    fetch('/logout', { method: 'POST', credentials: 'same-origin' });
-    dispatch({ type: 'LOGOUT' });
-  }
-  const mapDispatchToProps = (dispatch) => ({
-    setLogout: () => handleLogout(dispatch),
-  });
-  
-  export default connect(
-    null,
-    mapDispatchToProps
-  )(FrontMenuBar);
+function handleLogout(dispatch) {
+  fetch('/logout', { method: 'POST', credentials: 'same-origin' });
+  dispatch({ type: 'LOGOUT' });
+}
+const mapDispatchToProps = dispatch => ({
+  setLogout: () => handleLogout(dispatch),
+});
 
+export default connect(
+  null,
+  mapDispatchToProps
+)(FrontMenuBar);
