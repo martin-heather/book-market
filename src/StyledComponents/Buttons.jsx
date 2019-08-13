@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
   margin: 10px auto;
-  background-color: #002c59;
-  color: #e4e4e4;
+  background-color: var(--dark-blue);
+  color: var(--paper-grey);
   font-family: 'Arbutus Slab', serif;
   font-size: 0.75rem;
   padding: 7px;

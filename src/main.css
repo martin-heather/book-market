@@ -89,6 +89,21 @@ img {
 }
 /* End of Log in buttons */
 
+/* Upload button */
+
+.uploadButton {
+  height: 1rem;
+  padding: 4px;
+  background-color: var(--paper-grey);
+  color: var(--dark-blue);
+  font-family: 'Arbutus Slab', serif;
+  font-size: 0.6rem;
+  border: 1px solid #002c59;
+  border-radius: var(--border-radius);
+  outline-width: 0;
+  cursor: pointer;
+}
+
 .ItemCards {
   display: flex;
   flex-wrap: wrap;

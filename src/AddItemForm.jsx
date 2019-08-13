@@ -5,12 +5,67 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
 import { Header } from './StyledComponents/Header.jsx';
+import { Button } from './StyledComponents/Buttons.jsx';
 
 const AddItemWrapper = styled(FormWindow)`
   text-align: left;
 `;
 
+const Input = styled.input`
+  margin: 4px 0;
+  width: 100%;
+  height: 1.2rem;
+  font-size: 0.6rem;
+  font-family: 'Arbutus Slab', serif;
+  color: var(--dark-blue);
+  margin: 0;
+  border-radius: var(--border-radius);
+  -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+  -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+  box-sizing: border-box;
+  outline-width: 0;
+`;
+
+const Textarea = styled.textarea`
+  margin: 4px 0;
+  width: 100%;
+  margin: 0;
+  border-radius: var(--border-radius);
+  font-size: 0.6rem;
+  font-family: 'Arbutus Slab', serif;
+  color: var(--dark-blue);
+  -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+  -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+  box-sizing: border-box;
+  outline-width: 0;
+`;
+
+const InputButton = styled.input`
+  margin: 10px auto;
+  background-color: #002c59;
+  color: #e4e4e4;
+  font-family: 'Arbutus Slab', serif;
+  font-size: 0.75rem;
+  padding: 7px;
+  border: 1px solid #002c59;
+  border-radius: var(--border-radius);
+  outline-width: 0;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  :hover {
+    transform: scale(1.05);
+    box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+  }
+  :active {
+    transform: scale(1);
+    box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0);
+  }
+`;
+
 const FormHeader = styled(Header)`
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  font-size: 1.6rem;
   background-image: linear-gradient(
     0deg,
     rgba(0, 44, 89, 0.9),
@@ -84,13 +139,17 @@ class AddItemForm extends Component {
   };
 
   render() {
+    let hidden = {
+      visibility: 'hidden',
+      width: '66%',
+    };
     return (
       <AddItemWrapper>
         <FormHeader>Sell a Book</FormHeader>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Title{' '}
-            <input
+            <Input
+              placeholder="Title"
               required
               type="text"
               onChange={this.handleTitle}
@@ -99,8 +158,8 @@ class AddItemForm extends Component {
           </label>
           <br />
           <label>
-            Author{' '}
-            <input
+            <Input
+              placeholder="Author (Last Name, First Name)"
               required
               type="text"
               onChange={this.handleAuthor}
@@ -109,8 +168,8 @@ class AddItemForm extends Component {
           </label>
           <br />
           <label>
-            Language{' '}
-            <input
+            <Input
+              placeholder="Language"
               required
               type="text"
               onChange={this.handleLanguage}
@@ -119,8 +178,8 @@ class AddItemForm extends Component {
           </label>
           <br />
           <label>
-            Category{' '}
-            <input
+            <Input
+              placeholder="Category"
               required
               type="text"
               onChange={this.handleCategory}
@@ -129,29 +188,41 @@ class AddItemForm extends Component {
           </label>
           <br />
           <label>
-            Price{' '}
-            <input
+            <Input
+              placeholder="Price"
               required
-              type="text"
+              type="number"
               onChange={this.handlePrice}
               value={this.state.price}
             />
           </label>
           <br />
-          <label>
-            Image <input required type="file" onChange={this.handleImagePath} />
+          <label className="uploadButton">
+            Upload Book Cover
+            <Input
+              style={hidden}
+              required
+              type="file"
+              onChange={this.handleImagePath}
+              placeholder="Upload Book Cover"
+            />
           </label>
           <br />
           <label>
-            Description{' '}
-            <input
+            <Textarea
+              placeholder="Enter a description of your book."
+              name="message"
+              rows="5"
+              cols="30"
               required
-              type="text"
               onChange={this.handleDesc}
               value={this.state.desc}
             />
           </label>
-          <button>Add Book to Inventory</button>
+          <center>
+            <Button>Add Book to Inventory</Button>{' '}
+            <InputButton type="reset" value="Reset Form" />
+          </center>
         </form>
       </AddItemWrapper>
     );
