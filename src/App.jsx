@@ -119,12 +119,10 @@ class App extends Component {
             </button>
             {this.state.signin === 'signup' ? (
               <>
-                <h3>Sign Up</h3>
                 <Signup />
               </>
             ) : (
               <>
-                <h3>Log In</h3>
                 <Login />
               </>
             )}

@@ -105,6 +105,17 @@ img {
   cursor: pointer;
 }
 
+.home-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.categories-div {
+  min-width: 200px;
+  margin-top: 25px;
+  font-size: 0.8rem;
+}
+
 .ItemCards {
   display: flex;
   flex-wrap: wrap;

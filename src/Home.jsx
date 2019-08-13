@@ -83,6 +83,51 @@ class Home extends Component {
     }
   }
 
+  renderCategories() {
+    let categories = [];
+    let items = this.props.inventory;
+    for (let i = 0; i < items.length; i++) {
+      categories = categories.concat(items[i].categories);
+    }
+    console.log(categories);
+
+    let eliminateDuplicates = arr => {
+      var i,
+        len = arr.length,
+        out = [],
+        obj = {};
+
+      for (i = 0; i < len; i++) {
+        obj[arr[i]] = 0;
+      }
+      for (i in obj) {
+        out.push(i);
+      }
+      return out;
+    };
+
+    let categoryList = eliminateDuplicates(categories).sort();
+
+    return (
+      <div>
+        {categoryList.map(category => (
+          <>
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                name={category}
+                value={category}
+                key={category}
+              />
+              &nbsp;{category}
+            </label>
+            <br />
+          </>
+        ))}
+      </div>
+    );
+  }
+
   render() {
     console.log('this.props: ', this.props);
     console.log('this.state: ', this.state);
@@ -149,8 +194,12 @@ class Home extends Component {
             </SortDiv>
           </Right>
         </FindWrapper>
-
-        <div className="ItemCards">{searchResults.map(inventoryCards)}</div>
+        <div className="home-div">
+          <div className="categories-div">
+            <strong>Filter Results</strong> {this.renderCategories()}
+          </div>
+          <div className="ItemCards">{searchResults.map(inventoryCards)}</div>
+        </div>
       </>
     );
   }
