@@ -30,6 +30,7 @@ class Home extends Component {
     this.state = {
       sortBy: 'default',
       categories: [],
+      loading: true,
     };
   }
 
@@ -39,7 +40,7 @@ class Home extends Component {
     if (body.success) {
       this.props.handleLoadInventory(body);
       console.log(body.inventory);
-      this.setState({ sortedInventory: body.inventory });
+      this.setState({ sortedInventory: body.inventory, loading: false });
       console.log(this.state.sortedInventory);
     }
   }
@@ -137,6 +138,9 @@ class Home extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return 'loading';
+    }
     console.log('this.props: ', this.props);
     //]why has this.state.categories changed here?
     console.log('this.state: ', this.state);

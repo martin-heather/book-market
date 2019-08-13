@@ -115,7 +115,7 @@ class App extends Component {
               className={`right halfbutton ${loginButton}`}
               value="login"
             >
-              Log In
+              Log In&nbsp;
             </button>
             {this.state.signin === 'signup' ? (
               <>

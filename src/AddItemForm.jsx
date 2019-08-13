@@ -77,6 +77,7 @@ class AddItemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // loading: true,
       title: '',
       author: '',
       desc: '',
@@ -109,10 +110,7 @@ class AddItemForm extends Component {
     const response2 = await fetch('/inventory');
     const body2 = await response2.json();
     if (body2.success) {
-      this.props.dispatch({
-        type: 'UPDATE_INVENTORY',
-        newInventory: body2.inventory,
-      });
+      this.props.handleUpdateInventory(body2);
       alert('Your book is now in the catalogue.');
     }
   };
@@ -235,4 +233,23 @@ class AddItemForm extends Component {
   }
 }
 
-export default connect()(AddItemForm);
+const mapStateToProps = state => {
+  return {
+    inventory: state.allInventory,
+    userProfiles: state.allUserProfiles,
+    lgin: state.loggedIn,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  handleUpdateInventory: body =>
+    dispatch({
+      type: 'UPDATE_INVENTORY',
+      newInventory: body.inventory,
+    }),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddItemForm);
