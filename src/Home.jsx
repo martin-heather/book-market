@@ -29,6 +29,7 @@ class Home extends Component {
     super(props);
     this.state = {
       sortBy: 'default',
+      categories: [],
     };
   }
 
@@ -45,6 +46,14 @@ class Home extends Component {
 
   handleSortBy = evt => {
     this.setState({ sortBy: evt.target.value });
+  };
+
+  handleCategories = evt => {
+    console.log('evt.target: ', evt.target);
+    this.setState({
+      categories: this.state.categories.push(evt.target.value),
+    });
+    console.log('this.state: ', this.state);
   };
 
   renderSortedInventory(sortBy) {
@@ -89,7 +98,6 @@ class Home extends Component {
     for (let i = 0; i < items.length; i++) {
       categories = categories.concat(items[i].categories);
     }
-    console.log(categories);
 
     let eliminateDuplicates = arr => {
       var i,
@@ -118,6 +126,7 @@ class Home extends Component {
                 name={category}
                 value={category}
                 key={category}
+                onClick={this.handleCategories}
               />
               &nbsp;{category}
             </label>
@@ -130,11 +139,25 @@ class Home extends Component {
 
   render() {
     console.log('this.props: ', this.props);
+    //]why has this.state.categories changed?
     console.log('this.state: ', this.state);
     const sortBy = this.state.sortBy;
-    const inventory =
-      this.renderSortedInventory(sortBy) || this.props.inventory;
+    let inventory = this.renderSortedInventory(sortBy) || this.props.inventory;
     console.log(inventory);
+    //]categories
+    const categories = this.state.categories;
+    inventory =
+      categories > 0
+        ? categories.map(genre =>
+            inventory.filter(item =>
+              item.category.includes(genre) === true
+                ? [...inventory, item]
+                : undefined
+            )
+          )
+        : inventory;
+    console.log('whoa: ', inventory);
+
     const searchResults = inventory.filter(item =>
       item.title.toLowerCase().includes(this.props.query.toLowerCase())
     );
@@ -196,7 +219,7 @@ class Home extends Component {
         </FindWrapper>
         <div className="home-div">
           <div className="categories-div">
-            <strong>Filter Results</strong> {this.renderCategories()}
+            <strong>Categories</strong> {this.renderCategories()}
           </div>
           <div className="ItemCards">{searchResults.map(inventoryCards)}</div>
         </div>
