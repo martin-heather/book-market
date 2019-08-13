@@ -17,6 +17,7 @@ body {
 html {
   font-family: 'Arbutus Slab', serif;
   font-size: 1.6rem;
+  color: var(--dark-blue);
 }
 
 img {

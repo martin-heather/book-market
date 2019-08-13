@@ -7,6 +7,7 @@ const initialState = {
   username: '',
   query: '',
   itemsInCart: [],
+  cartTotal: 0,
   itemsInWishList: [],
   signin: 'login',
 };
@@ -57,6 +58,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         itemsInCart: state.itemsInCart.concat([itemId]),
+      };
+    case 'UPDATE_TOTAL':
+      console.log('action.cartTotal: ', action.cartTotal);
+      return {
+        ...state,
+        cartTotal: action.cartTotal,
       };
     case 'LOAD_WISHLIST':
       console.log('state: ', state, 'action: ', action);

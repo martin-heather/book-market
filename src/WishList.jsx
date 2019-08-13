@@ -91,6 +91,9 @@ class WishList extends Component {
           {list.length > 0
             ? this.populateWishList()
             : "You haven't added anything to your wish list yet."}
+          <Link to="/">
+            <Button>Continue Shopping</Button>
+          </Link>
         </ItemCard>
       </ItemDetailCard>
     );

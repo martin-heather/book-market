@@ -22,6 +22,7 @@ const generateId = () => {
 const sessions = {};
 const userProfiles = [];
 const itemsInCart = [];
+const cartTotal = 0;
 const itemsInWishList = [];
 const inventory = [
   {
@@ -124,7 +125,7 @@ const inventory = [
     category: 'fiction',
     language: 'French',
     imagePath: '/images/hiver.jpg',
-    price: 6.99,
+    price: 9.99,
     timeAdded: 1564676760534,
     seller: 'Samer Ahmed',
   },
@@ -323,6 +324,7 @@ app.post('/logout', (req, res) => {
   delete sessions[sessionId];
   itemsInCart.length = 0;
   itemsInWishList.length = 0;
+  CartTotal = 0;
   res.send(JSON.stringify({ success: true }));
 });
 
@@ -421,7 +423,7 @@ app.get('/API-shoppingcart', (req, res) => {
       JSON.stringify({ success: false, message: 'Invalid session' })
     );
   }
-  res.send(JSON.stringify({ success: true, itemsInCart }));
+  res.send(JSON.stringify({ success: true, itemsInCart, cartTotal }));
 });
 
 app.post('/addtocart', upload.none(), (req, res) => {

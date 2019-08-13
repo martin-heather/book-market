@@ -5,11 +5,26 @@ import { Link } from 'react-router-dom';
 import TakeMoney from './Payment.jsx';
 
 import styled from 'styled-components';
-import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
-import { ItemCard } from './StyledComponents/ItemCard.jsx';
+// import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
+//import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
 
+const CartDetailCard = styled.div`
+  width: 450px;
+  font-size: 0.75rem;
+  text-align: left;
+  padding: 15px;
+`;
+
+const CartItemCard = styled.div`
+  width: 450px;
+  font-size: 0.75rem;
+  text-align: left;
+  padding: 15px;
+`;
+
 const Desc = styled.div`
+  width: 350px;
   font-size: 0.75rem;
   text-align: left;
   padding: 15px;
@@ -17,7 +32,7 @@ const Desc = styled.div`
 
 const CartItem = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   font-size: 0.75rem;
   text-align: left;
   padding: 15px;
@@ -62,26 +77,40 @@ class ShoppingCart extends Component {
       id => this.props.inventory.filter(book => book.id == Number(id))[0]
     );
     console.log(booksInCart);
-    return booksInCart.map(item => (
-      <CartItem key={item.id}>
-        <Link to={`/item/${item.id}`}>
-          <CartImage src={item.imagePath} />
-        </Link>
-        <Desc>
-          <div>
-            <strong>{item.title}</strong>
-          </div>
-          <div>
-            by{' '}
-            {item.author
-              .split(',')
-              .reverse()
-              .join(' ')}
-          </div>
-          <div>${item.price}</div>
-        </Desc>
-      </CartItem>
-    ));
+    let cartTotals = booksInCart.map(item => item.price);
+    let grandTotal = cartTotals.reduce((a, b) => a + b, 0);
+    this.props.handleCartTotal(grandTotal);
+    return (
+      <CartItemCard>
+        {booksInCart.map(item => (
+          <CartItem key={item.id}>
+            <Link to={`/item/${item.id}`}>
+              <CartImage src={item.imagePath} />
+            </Link>
+            <Desc>
+              <div>
+                <strong>{item.title}</strong>
+              </div>
+              <div>
+                by{' '}
+                {item.author
+                  .split(',')
+                  .reverse()
+                  .join(' ')}
+              </div>
+              <div>${item.price}</div>
+            </Desc>
+          </CartItem>
+        ))}
+        <div>Total: ${grandTotal}</div>
+        <WideDiv>
+          <Link to="/">
+            <Button>Continue Shopping</Button>
+          </Link>{' '}
+          <TakeMoney />
+        </WideDiv>
+      </CartItemCard>
+    );
   };
 
   render = () => {
@@ -92,17 +121,20 @@ class ShoppingCart extends Component {
     }
     let cart = this.props.itemsInCart;
     return (
-      <ItemDetailCard>
-        <ItemCard>
-          {cart.length > 0
-            ? this.populateUserCart()
-            : "You haven't added anything to your cart yet."}
-        </ItemCard>
-        <WideDiv>
-          <Button>Proceed to Checkout</Button>
-          <TakeMoney />
-        </WideDiv>
-      </ItemDetailCard>
+      <CartDetailCard>
+        <CartItemCard>
+          {cart.length > 0 ? (
+            this.populateUserCart()
+          ) : (
+            <>
+              <div>You haven't added anything to your cart yet.</div>{' '}
+              <Link to="/">
+                <Button>Continue Shopping</Button>
+              </Link>
+            </>
+          )}
+        </CartItemCard>
+      </CartDetailCard>
     );
   };
 }
@@ -122,6 +154,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'LOAD_CART', itemsInCart: body.itemsInCart }),
   handleLoadInventory: body =>
     dispatch({ type: 'LOAD_INVENTORY', inventory: body.inventory }),
+  handleCartTotal: cartTotal =>
+    dispatch({ type: 'UPDATE_TOTAL', cartTotal: cartTotal }),
 });
 
 export default connect(

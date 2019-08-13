@@ -113,6 +113,7 @@ class AddItemForm extends Component {
         type: 'UPDATE_INVENTORY',
         newInventory: body2.inventory,
       });
+      alert('Your book is now in the catalogue.');
     }
   };
 
@@ -224,6 +225,11 @@ class AddItemForm extends Component {
             <InputButton type="reset" value="Reset Form" />
           </center>
         </form>
+        <center>
+          <Link to="/">
+            <Button>Continue Shopping</Button>
+          </Link>
+        </center>
       </AddItemWrapper>
     );
   }
