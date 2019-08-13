@@ -22,6 +22,7 @@ const generateId = () => {
 const sessions = {};
 const userProfiles = [];
 const itemsInCart = [];
+const itemsInWishList = [];
 const inventory = [
   {
     id: 1,
@@ -379,6 +380,19 @@ app.post('/additem', upload.single('image'), (req, res) => {
   inventory.push(newItem);
   console.log('inventory: ', inventory);
   res.send(JSON.stringify({ success: true, newInventory: inventory }));
+});
+
+//Wish List
+
+app.get('/API-wishlist', (req, res) => {
+  console.log('Sending back the items in Wish List', req.headers);
+  const sessionId = req.cookies.sid;
+  if (!sessions[sessionId]) {
+    return res.send(
+      JSON.stringify({ success: false, message: 'Invalid session' })
+    );
+  }
+  res.send(JSON.stringify({ success: true, itemsInWishList }));
 });
 
 //Shopping Cart & Checkout

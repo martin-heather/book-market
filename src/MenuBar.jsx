@@ -26,7 +26,7 @@ function MenuBar(props) {
       </Left>
       <Right>
         <MenuLink to="/additem">Sell a Book</MenuLink>
-        <MenuLink to="/">Wish List</MenuLink>
+        <MenuLink to="/wishlist">Wish List</MenuLink>
         <MenuLink to="/shoppingcart">Shopping Cart</MenuLink>
         <MenuLink to="/" onClick={setLogout}>
           Logout

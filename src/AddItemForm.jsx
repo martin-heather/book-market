@@ -204,7 +204,7 @@ class AddItemForm extends Component {
               required
               type="file"
               onChange={this.handleImagePath}
-              placeholder="Upload Book Cover"
+              placeholder="Click to Upload Book Cover"
             />
           </label>
           <br />

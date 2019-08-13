@@ -11,6 +11,7 @@ import Signup from './Signup.jsx';
 import Home from './Home.jsx';
 import AddItemForm from './AddItemForm.jsx';
 import ShoppingCart from './ShoppingCart.jsx';
+import WishList from './WishList.jsx';
 import ItemDetails from './ItemDetails.jsx';
 
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
@@ -41,6 +42,10 @@ class App extends Component {
 
   renderShoppingCart = () => {
     return <ShoppingCart />;
+  };
+
+  renderWishList = () => {
+    return <WishList />;
   };
 
   renderAddItem = () => {
@@ -78,6 +83,7 @@ class App extends Component {
               path="/shoppingcart"
               render={this.renderShoppingCart}
             />
+            <Route exact={true} path="/wishlist" render={this.renderWishList} />
             <Route exact={true} path="/additem" render={this.renderAddItem} />
             <Route
               exact={true}

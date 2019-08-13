@@ -14,8 +14,12 @@ const Desc = styled.div`
   padding: 15px;
 `;
 
+const Form = styled.form`
+  display: inline-block;
+`;
+
 class ItemDetails extends Component {
-  state = { loading: true, itemsInCart: [] };
+  state = { loading: true, itemsInCart: [], itemsInWishList: [] };
 
   async componentDidMount() {
     const response = await fetch('/inventory');
@@ -47,8 +51,12 @@ class ItemDetails extends Component {
     }
   };
 
-  handleId = evt => {
+  handleCartId = evt => {
     this.setState({ itemsInCart: evt.target.value });
+  };
+
+  handleListId = evt => {
+    this.setState({ itemsInWishList: evt.target.value });
   };
 
   addToWishList = event => {
@@ -83,14 +91,16 @@ class ItemDetails extends Component {
               .join(' ')}
           </div>
           <div>${item.price}</div>
-          <form onSubmit={this.addToCart}>
-            <Button onClick={this.handleId} value={item.id}>
+          <Form onSubmit={this.addToCart}>
+            <Button onClick={this.handleCartId} value={item.id}>
               Add to Cart
             </Button>
-          </form>{' '}
-          <GhostButton onClick={this.addToWishList} value={item.id}>
-            Add to Wish List
-          </GhostButton>
+          </Form>{' '}
+          <Form onSubmit={this.addToWishList}>
+            <GhostButton onClick={this.handleListId} value={item.id}>
+              Add to Wish List
+            </GhostButton>
+          </Form>
           <Desc>
             {item.desc}
             <br />
@@ -122,6 +132,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: 'UPDATE_CART',
       itemForCart: cartItem,
+    }),
+  handleAddToWishList: listItem =>
+    dispatch({
+      type: 'UPDATE_WISHLIST',
+      itemForWishList: listItem,
     }),
 });
 

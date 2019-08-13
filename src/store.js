@@ -7,6 +7,7 @@ const initialState = {
   username: '',
   query: '',
   itemsInCart: [],
+  itemsInWishList: [],
   signin: 'login',
 };
 
@@ -50,6 +51,18 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         itemsInCart: state.itemsInCart.concat([itemId]),
+      };
+    case 'LOAD_WISHLIST':
+      console.log('state: ', state, 'action: ', action);
+      return {
+        ...state,
+        itemsInWishList: action.itemsInWishList,
+      };
+    case 'UPDATE_WISHLIST':
+      let listItem = Number(action.itemForWishList);
+      return {
+        ...state,
+        itemsInWishList: state.itemsInWishList.concat([listItem]),
       };
     case 'SET_QUERY':
       return { ...state, query: action.query };
