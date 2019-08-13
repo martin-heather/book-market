@@ -10,5 +10,4 @@ export const MenuLink = styled(Link)`
   :hover {
     text-shadow: 0 0 2px #4d7baa, 0 0 18px #f2f8ff;
   }
-  }
 `;

@@ -5,18 +5,18 @@ import { Link } from 'react-router-dom';
 import TakeMoney from './Payment.jsx';
 
 import styled from 'styled-components';
-// import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
-//import { ItemCard } from './StyledComponents/ItemCard.jsx';
+import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
+import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
 
-const CartDetailCard = styled.div`
-  width: 450px;
+const CartDetailCard = styled(ItemDetailCard)`
+  width: 550px;
   font-size: 0.75rem;
   text-align: left;
   padding: 15px;
 `;
 
-const CartItemCard = styled.div`
+const CartItemCard = styled(ItemCard)`
   width: 450px;
   font-size: 0.75rem;
   text-align: left;
@@ -45,6 +45,11 @@ const CartImage = styled.img`
 
 const WideDiv = styled.div`
   text-align: center;
+`;
+
+const Right = styled.div`
+  padding-right: 30px;
+  text-align: right;
 `;
 
 class ShoppingCart extends Component {
@@ -82,6 +87,9 @@ class ShoppingCart extends Component {
     this.props.handleCartTotal(grandTotal);
     return (
       <CartItemCard>
+        <h3>
+          <center>Shopping Cart</center>
+        </h3>
         {booksInCart.map(item => (
           <CartItem key={item.id}>
             <Link to={`/item/${item.id}`}>
@@ -102,7 +110,11 @@ class ShoppingCart extends Component {
             </Desc>
           </CartItem>
         ))}
-        <div>Total: ${grandTotal}</div>
+        <div>
+          <Right>
+            <strong>Total: ${grandTotal.toFixed(2)}</strong>
+          </Right>
+        </div>
         <WideDiv>
           <Link to="/">
             <Button>Continue Shopping</Button>

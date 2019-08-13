@@ -120,12 +120,11 @@ class Home extends Component {
       <div>
         {categoryList.map(category => (
           <>
-            <label class="checkbox-label">
+            <label className="checkbox-label" key={category}>
               <input
                 type="checkbox"
                 name={category}
                 value={category}
-                key={category}
                 onClick={this.handleCategories}
               />
               &nbsp;{category}
@@ -139,7 +138,7 @@ class Home extends Component {
 
   render() {
     console.log('this.props: ', this.props);
-    //]why has this.state.categories changed?
+    //]why has this.state.categories changed here?
     console.log('this.state: ', this.state);
     const sortBy = this.state.sortBy;
     let inventory = this.renderSortedInventory(sortBy) || this.props.inventory;

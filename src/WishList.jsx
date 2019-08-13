@@ -7,7 +7,26 @@ import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
 
+const ListDetailCard = styled(ItemDetailCard)`
+  width: 550px;
+  font-size: 0.75rem;
+  text-align: left;
+  padding: 15px;
+`;
+
+const Form = styled.form`
+  display: inline-block;
+`;
+
+const ListItemCard = styled(ItemCard)`
+  width: 450px;
+  font-size: 0.75rem;
+  text-align: left;
+  padding: 15px;
+`;
+
 const Desc = styled.div`
+  width: 350px;
   font-size: 0.75rem;
   text-align: left;
   padding: 15px;
@@ -15,7 +34,7 @@ const Desc = styled.div`
 
 const ListItem = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   font-size: 0.75rem;
   text-align: left;
   padding: 15px;
@@ -26,27 +45,56 @@ const ListImage = styled.img`
   margin: 15px;
 `;
 
+const WideDiv = styled.div`
+  text-align: center;
+`;
+
 class WishList extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
+    this.state = { loading: true, itemsInCart: [] };
   }
 
   async componentDidMount() {
-    const response2 = await fetch('/inventory');
-    const body2 = await response2.json();
-    if (body2.success) {
-      this.props.handleLoadInventory(body2); //1st inventory then loading
+    const response = await fetch('/inventory');
+    const body = await response.json();
+    if (body.success) {
+      this.props.handleLoadInventory(body); //1st inventory then loading
     }
 
-    const response = await fetch('/API-wishlist');
-    const body = await response.json();
-    console.log('body.itemsInWishList: ', body.itemsInWishList);
-    if (body.success) {
-      this.props.handleLoadWishList(body); //1st list then loading.
+    const response3 = await fetch('/API-wishlist');
+    const body3 = await response3.json();
+    console.log('body3.itemsInWishList: ', body3.itemsInWishList);
+    if (body3.success) {
+      this.props.handleLoadWishList(body3); //1st list then loading.
       this.setState({ loading: false });
     }
   }
+
+  addToCart = async event => {
+    event.preventDefault();
+    console.log('add to cart: ', this.state.itemsInCart);
+    console.log('shopper: ', this.props.username);
+    let data = new FormData();
+    data.append('itemsInCart', this.state.itemsInCart);
+    const response = await fetch('/addtocart', {
+      method: 'POST',
+      body: data,
+      credentials: 'same-origin',
+    });
+    const body = await response.json();
+    if (!body.success) return alert(body.message);
+
+    const response2 = await fetch('/API-shoppingcart');
+    const body2 = await response2.json();
+    if (body2.success) {
+      this.props.handleAddToCart(body2.itemsInCart);
+    }
+  };
+
+  handleCartId = evt => {
+    this.setState({ itemsInCart: evt.target.value });
+  };
 
   populateWishList = () => {
     let bookIds = this.props.itemsInWishList;
@@ -56,26 +104,38 @@ class WishList extends Component {
       id => this.props.inventory.filter(book => book.id == Number(id))[0]
     );
     console.log(booksInList);
-    return booksInList.map(item => (
-      <ListItem key={item.id}>
-        <Link to={`/item/${item.id}`}>
-          <ListImage src={item.imagePath} />
-        </Link>
-        <Desc>
-          <div>
-            <strong>{item.title}</strong>
-          </div>
-          <div>
-            by{' '}
-            {item.author
-              .split(',')
-              .reverse()
-              .join(' ')}
-          </div>
-          <div>${item.price}</div>
-        </Desc>
-      </ListItem>
-    ));
+    return (
+      <ListItemCard>
+        <h3>
+          <center>Wish List</center>
+        </h3>
+        {booksInList.map(item => (
+          <ListItem key={item.id}>
+            <Link to={`/item/${item.id}`}>
+              <ListImage src={item.imagePath} />
+            </Link>
+            <Desc>
+              <div>
+                <strong>{item.title}</strong>
+              </div>
+              <div>
+                by{' '}
+                {item.author
+                  .split(',')
+                  .reverse()
+                  .join(' ')}
+              </div>
+              <div>${item.price}</div>
+              <Form onSubmit={this.addToCart}>
+                <Button onClick={this.handleCartId} value={item.id}>
+                  Add to Cart
+                </Button>
+              </Form>
+            </Desc>
+          </ListItem>
+        ))}
+      </ListItemCard>
+    );
   };
 
   render = () => {
@@ -87,14 +147,16 @@ class WishList extends Component {
     let list = this.props.itemsInWishList;
     return (
       <ItemDetailCard>
-        <ItemCard>
+        <ListItemCard>
           {list.length > 0
             ? this.populateWishList()
             : "You haven't added anything to your wish list yet."}
-          <Link to="/">
-            <Button>Continue Shopping</Button>
-          </Link>
-        </ItemCard>
+          <center>
+            <Link to="/">
+              <Button>Continue Shopping</Button>
+            </Link>
+          </center>
+        </ListItemCard>
       </ItemDetailCard>
     );
   };
@@ -113,6 +175,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   handleLoadWishList: body =>
     dispatch({ type: 'LOAD_WISHLIST', itemsInWishList: body.itemsInWishList }),
+  handleAddToCart: cartItem =>
+    dispatch({
+      type: 'UPDATE_CART',
+      itemForCart: cartItem,
+    }),
   handleLoadInventory: body =>
     dispatch({ type: 'LOAD_INVENTORY', inventory: body.inventory }),
 });
