@@ -55,15 +55,29 @@ class ItemDetails extends Component {
     this.setState({ itemsInCart: evt.target.value });
   };
 
-  handleListId = evt => {
-    this.setState({ itemsInWishList: evt.target.value });
+  addToWishList = async event => {
+    event.preventDefault();
+    console.log('add to list: ', this.state.itemsInWishList);
+    console.log('shopper: ', this.props.username);
+    let data = new FormData();
+    data.append('itemsInList', this.state.itemsInWishList);
+    const response = await fetch('/addtolist', {
+      method: 'POST',
+      body: data,
+      credentials: 'same-origin',
+    });
+    const body = await response.json();
+    if (!body.success) return alert(body.message);
+
+    const response2 = await fetch('/API-wishlist');
+    const body2 = await response2.json();
+    if (body2.success) {
+      this.props.handleAddToWishList(body2.itemsInWishList);
+    }
   };
 
-  addToWishList = event => {
-    event.preventDefault();
-    console.log('add to wish list: ', event.target.value);
-    this.setState({ itemForWishList: event.target.value });
-    console.log(this.state.itemForWishList);
+  handleListId = evt => {
+    this.setState({ itemsInWishList: evt.target.value });
   };
 
   render = () => {

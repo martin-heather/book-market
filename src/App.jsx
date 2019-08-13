@@ -15,10 +15,9 @@ import WishList from './WishList.jsx';
 import ItemDetails from './ItemDetails.jsx';
 
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
-import { Button, GhostButton } from './StyledComponents/Buttons.jsx';
 
 class App extends Component {
-  state = { loading: true, signin: 'login' };
+  state = { signin: 'login' }; //loading: true,
   async componentDidMount() {
     const response = await fetch('/session');
     const body = await response.json();
@@ -32,7 +31,7 @@ class App extends Component {
         type: 'LOAD_INVENTORY',
         inventory: body2.inventory,
       });
-      this.setState({ loading: false });
+      // this.setState({ loading: false });
     }
   }
 
@@ -69,9 +68,9 @@ class App extends Component {
 
   render() {
     if (this.props.lgin) {
-      if (this.state.loading) {
-        return 'loading';
-      }
+      // if (this.state.loading) {
+      //   return 'loading';
+      // }
       return (
         <div>
           <BrowserRouter>

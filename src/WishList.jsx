@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
-import {
-  ItemDetailCard,
-  DetailDiv,
-} from './StyledComponents/ItemDetailCard.jsx';
+import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
 
@@ -27,10 +24,6 @@ const ListItem = styled.div`
 const ListImage = styled.img`
   max-width: 60px;
   margin: 15px;
-`;
-
-const WideDiv = styled.div`
-  text-align: center;
 `;
 
 class WishList extends Component {

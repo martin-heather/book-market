@@ -5,10 +5,7 @@ import { Link } from 'react-router-dom';
 import TakeMoney from './Payment.jsx';
 
 import styled from 'styled-components';
-import {
-  ItemDetailCard,
-  DetailDiv,
-} from './StyledComponents/ItemDetailCard.jsx';
+import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
 import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
 

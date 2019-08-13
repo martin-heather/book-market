@@ -22,7 +22,13 @@ function reducer(state = initialState, action) {
         username: action.username,
       };
     case 'LOGOUT':
-      return { ...state, loggedIn: false, username: '', itemsInCart: [] };
+      return {
+        ...state,
+        loggedIn: false,
+        username: '',
+        itemsInCart: [],
+        itemsInWishList: [],
+      };
     case 'LOAD_USERS':
       console.log('state: ', state, 'action: ', action);
       return {

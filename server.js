@@ -304,7 +304,7 @@ app.post('/login', upload.none(), (req, res) => {
   const enteredPassword = req.body.password;
   const filteredUsers = userProfiles.filter(user => user.name === username);
   console.log(filteredUsers);
-  const expectedPassword = filteredUsers[0].password;
+  const expectedPassword = filteredUsers[0] ? filteredUsers[0].password : null;
   console.log('expected password', expectedPassword);
   if (enteredPassword === expectedPassword) {
     console.log('password matches');
@@ -322,6 +322,7 @@ app.post('/logout', (req, res) => {
   const sessionId = req.cookies.sid;
   delete sessions[sessionId];
   itemsInCart.length = 0;
+  itemsInWishList.length = 0;
   res.send(JSON.stringify({ success: true }));
 });
 
@@ -395,10 +396,25 @@ app.get('/API-wishlist', (req, res) => {
   res.send(JSON.stringify({ success: true, itemsInWishList }));
 });
 
+app.post('/addtolist', upload.none(), (req, res) => {
+  console.log('*** item added to Wish List');
+  console.log('POST new list body', req.body);
+  const bookId = req.body.itemsInList;
+  itemsInWishList.push(bookId);
+  console.log('itemsInWishList: ', itemsInWishList);
+  const sessionId = req.cookies.sid;
+  if (!sessions[sessionId]) {
+    return res.send(
+      JSON.stringify({ success: false, message: 'Invalid session' })
+    );
+  }
+  res.send(JSON.stringify({ success: true, itemsInWishList }));
+});
+
 //Shopping Cart & Checkout
 
 app.get('/API-shoppingcart', (req, res) => {
-  console.log('Sending back the items in Cart', req.headers);
+  console.log('Sending back the items in Cart'); //, req.headers
   const sessionId = req.cookies.sid;
   if (!sessions[sessionId]) {
     return res.send(
