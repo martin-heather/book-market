@@ -221,6 +221,72 @@ const inventory = [
     timeAdded: 1564676760589,
     seller: 'Christie Kotsopoulos',
   },
+  {
+    id: 15,
+    title: 'The Marrow Thieves',
+    author: 'Dimaline, Cherie',
+    desc:
+      "In a futuristic world ravaged by global warming, people have lost the ability to dream, and the dreamlessness has led to widespread madness. The only people still able to dream are North America's Indigenous people, and it is their marrow that holds the cure for the rest of the world. But getting the marrow, and dreams, means death for the unwilling donors. Driven to flight, a fifteen-year-old and his companions struggle for survival, attempt to reunite with loved ones and take refuge from the 'recruiters' who seek them out to bring them to the marrow-stealing 'factories.'",
+    categories: ['fiction', 'young adult'],
+    language: 'English',
+    imagePath: '/images/marrow.jpg',
+    price: 16.98,
+    timeAdded: 1564676760590,
+    seller: 'Daniel Robineau',
+  },
+  {
+    id: 16,
+    title:
+      'The Black Count: Glory, Revolution, Betrayal, and the Real Count of Monte Cristo',
+    author: 'Reiss, Tom',
+    desc:
+      'The real-life protagonist of The Black Count, General Alex Dumas, is a man almost unknown today yet with a story that is strikingly familiar, because his son, the novelist Alexandre Dumas, used it to create some of the best loved heroes of literature. Yet, hidden behind these swashbuckling adventures was an even more incredible secret: the real hero was the son of a black slave -- who rose higher in the white world than any man of his race would before our own time.  Born in Saint-Domingue (now Haiti), Alex Dumas was briefly sold into bondage but made his way to Paris where he was schooled as a sword-fighting member of the French aristocracy. Enlisting as a private, he rose to command armies at the height of the Revolution in an audacious campaign across Europe and the Middle East – until he met an implacable enemy he could not defeat.',
+    categories: ['nonfiction', 'history', 'biography'],
+    language: 'English',
+    imagePath: '/images/count.jpg',
+    price: 17.98,
+    timeAdded: 1564676760600,
+    seller: 'Sylvie Morneau',
+  },
+  {
+    id: 17,
+    title: 'Georges',
+    author: 'Dumas, Alexandre',
+    desc:
+      "- Et quelle est cette réponse, Monsieur ? demanda Georges. - Cette réponse est que votre seconde demande est pour le moins aussi exagérée que la première. Je ne me bats pas avec un mulâtre... - C'est votre dernier mot ? dit-il. - Oui, Monsieur, répondit Henri. - Et, saluant MM. de Malmédie, il se retira suivi du gouverneur. - Je vous l'avais bien prédit, Monsieur, dit lord Williams lorsqu'ils furent à la porte. - Et vous ne m'aviez rien prédit que je ne susse d'avance, milord, répondit Georges ; mais je suis revenu ici pour accomplir une destinée. Il faut que j'aille jusqu'au bout. J'ai un préjugé à combattre. Il faut qu'il m'écrase ou que je le tue.",
+    categories: ['fiction', 'adventure'],
+    language: 'French',
+    imagePath: '/images/georges.jpg',
+    price: 20.98,
+    timeAdded: 1564676760610,
+    seller: 'Harjeet Singh',
+  },
+  {
+    id: 18,
+    title: 'Climbing from Gym to Crag',
+    author: 'Lewis, S. Peter',
+    desc:
+      "Getting strong and learning to climb hard routes in the gym doesn't prepare you for climbing outdoors where anything can happen. Climbing: From Gym to Crag is written by experts who teach climbing for a living. These long-time instructors have a clear, practical understanding of the different skills and climbing technique needed to go from climbing in the gym to climbing on real rock. From building anchors to leading and self-rescue, they'll teach you how to make the transition safely.",
+    categories: ['nonfiction', 'how-to'],
+    language: 'English',
+    imagePath: '/images/crag.jpg',
+    price: 18.98,
+    timeAdded: 1564676760615,
+    seller: 'Harjeet Singh',
+  },
+  {
+    id: 19,
+    title: 'Document 1',
+    author: 'Blais, François',
+    desc:
+      'Tess et Jude sont passés maîtres dans l’art du voyage virtuel. Un jour, l’idée de faire des Jack Kerouac d’eux-mêmes s’impose. Tess travaille au Subway, Jude est prestataire de l’aide sociale ; ils conviennent que rédiger le récit de leur expédition est l’unique moyen de la financer. Tess s’abreuve aux enseignements d’un gourou des lettres et tire les ficelles auprès d’un amoureux transi, auteur de romans abscons, afin d’obtenir une subvention du gouvernement. Le duo quittera-t-il enfin Grand-Mère à bord de sa Monte Carlo 2003 jaune pour sillonner les routes jusqu’à Bird-in-Hand, en Pennsylvanie ?',
+    categories: ['fiction'],
+    language: 'French',
+    imagePath: '/images/document.jpg',
+    price: 23.98,
+    timeAdded: 1564676760623,
+    seller: 'Julia Resende',
+  },
 ];
 
 //Data Classes
