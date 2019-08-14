@@ -54,7 +54,7 @@ class Home extends Component {
   handleCategories = evt => {
     console.log('evt.target: ', evt.target);
     this.setState({
-      categories: [...this.state.categories, evt.target.value],
+      category: evt.target.value,
     });
     console.log('this.state: ', this.state);
   };
@@ -123,10 +123,10 @@ class Home extends Component {
       <div>
         {categoryList.map(category => (
           <>
-            <label className="checkbox-label" key={category}>
+            <label className="radio-label" key={category}>
               <input
-                type="checkbox"
-                name={category}
+                type="radio"
+                name="category"
                 value={category}
                 onClick={this.handleCategories}
               />
@@ -151,17 +151,17 @@ class Home extends Component {
     ];
     console.log(inventory);
     //CATEGORY FILTER
-    const categories = this.state.categories;
+    const category = this.state.category;
     let filter = () => {
-      let filteredInventory = categories.map(genre =>
-        inventory.filter(item => item.categories.includes(genre))
+      let filteredInventory = inventory.filter(item =>
+        item.categories.includes(category)
       );
       let allFilterdInventory = [];
       allFilterdInventory = filteredInventory.map(item => item);
       return allFilterdInventory.flat();
     };
     console.log('filter: ', filter());
-    inventory = categories.length > 0 ? filter() : inventory;
+    inventory = category ? filter() : inventory;
     console.log('filtered inventory: ', inventory);
 
     const searchResults = inventory.filter(item =>
