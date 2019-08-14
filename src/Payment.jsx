@@ -9,9 +9,9 @@ class TakeMoney extends React.Component {
     fetch('/save-stripe-token', {
       method: 'POST',
       body: JSON.stringify(token),
-    }).then(response => {
-      response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
+    }).then(res => {
+      res.json().then(() => {
+        alert(`Thank you for your purchase.`);
       });
     });
   };

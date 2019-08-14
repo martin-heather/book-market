@@ -52,7 +52,7 @@ const WideDiv = styled.div`
 class WishList extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, itemsInCart: [] };
+    this.state = { loading: true, itemsInCart: [], itemsInWishList: [] };
   }
 
   async componentDidMount() {
@@ -90,10 +90,29 @@ class WishList extends Component {
     if (body2.success) {
       this.props.handleAddToCart(body2.itemsInCart);
     }
+    //** */remove item from wish list
+    let itemId = event.target.value;
+    console.log('itemId: ', itemId);
+    let listItems = this.state.itemsInWishList;
+    console.log('listItems: ', listItems);
+    this.setState({
+      itemsInWishList: listItems.filter(item => item.id !== itemId),
+    });
+    console.log('this.state.itemsInWishList: ', this.state.itemsInWishList);
+    //** */
   };
 
   handleCartId = evt => {
     this.setState({ itemsInCart: evt.target.value });
+    // //** */remove item from wish list
+    // let itemId = event.target.value;
+    // console.log('itemId: ', itemId);
+    // let listItems = this.state.itemsInWishList;
+    // console.log('listItems: ', listItems);
+    // this.setState({
+    //   itemsInWishList: listItems.filter(item => item.id !== itemId),
+    // });
+    // console.log('this.state.itemsInWishList: ', this.state.itemsInWishList);
   };
 
   populateWishList = () => {

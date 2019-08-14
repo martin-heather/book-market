@@ -52,7 +52,7 @@ class Home extends Component {
   handleCategories = evt => {
     console.log('evt.target: ', evt.target);
     this.setState({
-      categories: this.state.categories.push(evt.target.value),
+      categories: [...this.state.categories, evt.target.value],
     });
     console.log('this.state: ', this.state);
   };
@@ -142,24 +142,23 @@ class Home extends Component {
       return 'loading';
     }
     console.log('this.props: ', this.props);
-    //]why has this.state.categories changed here?
     console.log('this.state: ', this.state);
     const sortBy = this.state.sortBy;
-    let inventory = this.renderSortedInventory(sortBy) || this.props.inventory;
+    let inventory = this.renderSortedInventory(sortBy) || [
+      ...this.props.inventory,
+    ];
     console.log(inventory);
     //]categories
     const categories = this.state.categories;
-    inventory =
-      categories > 0
-        ? categories.map(genre =>
-            inventory.filter(item =>
-              item.category.includes(genre) === true
-                ? [...inventory, item]
-                : undefined
-            )
-          )
-        : inventory;
-    console.log('whoa: ', inventory);
+    let filter = () => {
+      let filteredInventory = categories.map(genre =>
+        inventory.filter(item => item.categories.includes(genre))
+      );
+      return filteredInventory[0];
+    };
+    console.log('filter: ', filter());
+    inventory = categories.length > 0 ? filter() : [...this.props.inventory];
+    console.log('filtered inventory: ', inventory);
 
     const searchResults = inventory.filter(item =>
       item.title.toLowerCase().includes(this.props.query.toLowerCase())
