@@ -30,8 +30,8 @@ class ItemDetails extends Component {
     }
   }
 
-  addToCart = async event => {
-    event.preventDefault();
+  addToCart = async evt => {
+    evt.preventDefault();
     console.log('add to cart: ', this.state.itemsInCart);
     console.log('shopper: ', this.props.username);
     let data = new FormData();
@@ -55,8 +55,8 @@ class ItemDetails extends Component {
     this.setState({ itemsInCart: evt.target.value });
   };
 
-  addToWishList = async event => {
-    event.preventDefault();
+  addToWishList = async evt => {
+    evt.preventDefault();
     console.log('add to list: ', this.state.itemsInWishList);
     console.log('shopper: ', this.props.username);
     let data = new FormData();
@@ -141,7 +141,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   handleLoadInventory: body =>
-    dispatch({ type: 'LOAD_INVENTORY', inventory: body.inventory }),
+    dispatch({
+      type: 'LOAD_INVENTORY',
+      inventory: body.inventory,
+    }),
   handleAddToCart: cartItem =>
     dispatch({
       type: 'UPDATE_CART',

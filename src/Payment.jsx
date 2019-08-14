@@ -16,11 +16,8 @@ class TakeMoney extends React.Component {
     });
   };
 
-  // ...
-
   render() {
     return (
-      // ...
       <StripeCheckout
         token={this.props.handleClearCart}
         stripeKey="pk_test_Dd1CvRncizSuBMF57u8wU9Jl00r2AcxDSj"

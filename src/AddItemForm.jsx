@@ -134,7 +134,7 @@ class AddItemForm extends Component {
     this.setState({ price: evt.target.value });
   };
   handleImagePath = evt => {
-    this.setState({ image: event.target.files[0] });
+    this.setState({ image: evt.target.files[0] });
   };
 
   render() {

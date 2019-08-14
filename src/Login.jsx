@@ -11,13 +11,13 @@ class Login extends Component {
       password: '',
     };
   }
-  handleUsernameChange = event => {
-    console.log('new username', event.target.value);
-    this.setState({ username: event.target.value });
+  handleUsernameChange = evt => {
+    console.log('new username', evt.target.value);
+    this.setState({ username: evt.target.value });
   };
-  handlePasswordChange = event => {
-    console.log('new password', event.target.value);
-    this.setState({ password: event.target.value });
+  handlePasswordChange = evt => {
+    console.log('new password', evt.target.value);
+    this.setState({ password: evt.target.value });
   };
   handleSubmit = async evt => {
     evt.preventDefault();
@@ -65,12 +65,5 @@ class Login extends Component {
     );
   };
 }
-
-// const mapStateToProps = (state, props) => {
-//   return {
-//     userProfiles: state.userProfiles,
-//     lgin: state.loggedIn,
-//   };
-// };
 
 export default connect()(Login);

@@ -40,13 +40,15 @@ class Home extends Component {
     if (body.success) {
       this.props.handleLoadInventory(body);
       console.log(body.inventory);
-      this.setState({ sortedInventory: body.inventory, loading: false });
+      this.setState({ sortedInventory: [...body.inventory], loading: false });
       console.log(this.state.sortedInventory);
     }
   }
 
   handleSortBy = evt => {
-    this.setState({ sortBy: evt.target.value });
+    this.setState({
+      sortBy: evt.target.value,
+    });
   };
 
   handleCategories = evt => {
@@ -148,16 +150,18 @@ class Home extends Component {
       ...this.props.inventory,
     ];
     console.log(inventory);
-    //]categories
+    //CATEGORY FILTER
     const categories = this.state.categories;
     let filter = () => {
       let filteredInventory = categories.map(genre =>
         inventory.filter(item => item.categories.includes(genre))
       );
-      return filteredInventory[0];
+      let allFilterdInventory = [];
+      allFilterdInventory = filteredInventory.map(item => item);
+      return allFilterdInventory.flat();
     };
     console.log('filter: ', filter());
-    inventory = categories.length > 0 ? filter() : [...this.props.inventory];
+    inventory = categories.length > 0 ? filter() : inventory;
     console.log('filtered inventory: ', inventory);
 
     const searchResults = inventory.filter(item =>

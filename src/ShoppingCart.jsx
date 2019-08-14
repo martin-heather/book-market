@@ -139,7 +139,7 @@ class ShoppingCart extends Component {
             this.populateUserCart()
           ) : (
             <>
-              <div>You haven't added anything to your cart yet.</div>{' '}
+              <div>Your cart is empty.</div>{' '}
               <Link to="/">
                 <Button>Continue Shopping</Button>
               </Link>

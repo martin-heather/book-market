@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 const initialState = {
   allInventory: [],
   allUserProfiles: [],
-  loggedIn: false, //document.cookie?
+  loggedIn: false,
   username: '',
   query: '',
   itemsInCart: [],

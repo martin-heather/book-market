@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 import { Header } from './StyledComponents/Header.jsx';
 import { MenuLink } from './StyledComponents/MenuLink.jsx';
 import { Left, Right } from './StyledComponents/Divs.jsx';
-import { Input } from './StyledComponents/Buttons.jsx';
 
 const MenuWrapper = styled(Header)`
   display: flex;
@@ -40,10 +39,6 @@ function handleLogout(dispatch) {
   fetch('/logout', { method: 'POST', credentials: 'same-origin' });
   dispatch({ type: 'LOGOUT' });
 }
-
-// const mapStateToProps = (state) => ({
-//   query: state.query,
-// });
 
 const mapDispatchToProps = dispatch => ({
   setLogout: () => handleLogout(dispatch),

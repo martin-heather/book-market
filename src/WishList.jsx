@@ -71,8 +71,8 @@ class WishList extends Component {
     }
   }
 
-  addToCart = async event => {
-    event.preventDefault();
+  addToCart = async evt => {
+    evt.preventDefault();
     console.log('add to cart: ', this.state.itemsInCart);
     console.log('shopper: ', this.props.username);
     let data = new FormData();
@@ -91,7 +91,7 @@ class WishList extends Component {
       this.props.handleAddToCart(body2.itemsInCart);
     }
     //** */remove item from wish list
-    let itemId = event.target.value;
+    let itemId = evt.target.value;
     console.log('itemId: ', itemId);
     let listItems = this.state.itemsInWishList;
     console.log('listItems: ', listItems);
@@ -105,7 +105,7 @@ class WishList extends Component {
   handleCartId = evt => {
     this.setState({ itemsInCart: evt.target.value });
     // //** */remove item from wish list
-    // let itemId = event.target.value;
+    // let itemId = evt.target.value;
     // console.log('itemId: ', itemId);
     // let listItems = this.state.itemsInWishList;
     // console.log('listItems: ', listItems);
@@ -165,7 +165,7 @@ class WishList extends Component {
     }
     let list = this.props.itemsInWishList;
     return (
-      <ItemDetailCard>
+      <ListDetailCard>
         <ListItemCard>
           {list.length > 0
             ? this.populateWishList()
@@ -176,7 +176,7 @@ class WishList extends Component {
             </Link>
           </center>
         </ListItemCard>
-      </ItemDetailCard>
+      </ListDetailCard>
     );
   };
 }

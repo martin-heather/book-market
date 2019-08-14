@@ -17,7 +17,6 @@ const MenuWrapper = styled(Header)`
 `;
 
 function FrontMenuBar(props) {
-  const { setLogout } = props;
   return (
     <MenuWrapper>
       <div>&nbsp;</div>

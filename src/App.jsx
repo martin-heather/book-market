@@ -17,7 +17,7 @@ import ItemDetails from './ItemDetails.jsx';
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
 
 class App extends Component {
-  state = { signin: 'login' }; //loading: true,
+  state = { signin: 'login' };
   async componentDidMount() {
     const response = await fetch('/session');
     const body = await response.json();
@@ -31,7 +31,6 @@ class App extends Component {
         type: 'LOAD_INVENTORY',
         inventory: body2.inventory,
       });
-      // this.setState({ loading: false });
     }
   }
 
@@ -68,9 +67,6 @@ class App extends Component {
 
   render() {
     if (this.props.lgin) {
-      // if (this.state.loading) {
-      //   return 'loading';
-      // }
       return (
         <div>
           <BrowserRouter>
