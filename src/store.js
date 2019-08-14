@@ -59,6 +59,11 @@ function reducer(state = initialState, action) {
         ...state,
         itemsInCart: state.itemsInCart.concat([itemId]),
       };
+    case 'CLEAR_CART':
+      return {
+        ...state,
+        itemsInCart: [],
+      };
     case 'UPDATE_TOTAL':
       console.log('action.cartTotal: ', action.cartTotal);
       return {

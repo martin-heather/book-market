@@ -455,8 +455,21 @@ app.post('/addtocart', upload.none(), (req, res) => {
   res.send(JSON.stringify({ success: true, itemsInCart }));
 });
 
+app.post('/clearcart', upload.none(), (req, res) => {
+  console.log('*** item added to cart');
+  console.log('POST new item body', req.body);
+  itemsInCart.length = 0;
+  if (!sessions[sessionId]) {
+    return res.send(
+      JSON.stringify({ success: false, message: 'Invalid session' })
+    );
+  }
+  res.send(JSON.stringify({ success: true, itemsInCart }));
+});
+
 app.post('/save-stripe-token', upload.none(), (req, res) => {
   console.log('req.body: ', req.body);
+  itemsInCart.length = 0;
   let token = req.body.stripeToken;
   let amount = req.body.amount;
   stripe.charges.create({

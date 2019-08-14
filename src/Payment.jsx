@@ -22,7 +22,7 @@ class TakeMoney extends React.Component {
     return (
       // ...
       <StripeCheckout
-        token={this.onToken}
+        token={this.props.handleClearCart}
         stripeKey="pk_test_Dd1CvRncizSuBMF57u8wU9Jl00r2AcxDSj"
         amount={this.props.cartTotal * 100}
       >
@@ -35,7 +35,15 @@ class TakeMoney extends React.Component {
 const mapStateToProps = state => {
   return {
     cartTotal: state.cartTotal,
+    itemsInCart: state.itemsInCart,
   };
 };
 
-export default connect(mapStateToProps)(TakeMoney);
+const mapDispatchToProps = dispatch => ({
+  handleClearCart: () => dispatch({ type: 'CLEAR_CART', itemsInCart: [] }),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TakeMoney);
