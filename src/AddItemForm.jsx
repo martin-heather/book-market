@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { FormWindow } from './StyledComponents/FormWindow.jsx';
 import { Header } from './StyledComponents/Header.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
+import { FormHeader } from './StyledComponents/Cart.jsx';
 
 const AddItemWrapper = styled(FormWindow)`
   text-align: left;
@@ -60,17 +61,6 @@ const InputButton = styled.input`
     transform: scale(1);
     box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0);
   }
-`;
-
-const FormHeader = styled(Header)`
-  border-radius: var(--border-radius);
-  margin-bottom: 15px;
-  font-size: 1.6rem;
-  background-image: linear-gradient(
-    0deg,
-    rgba(0, 44, 89, 0.9),
-    rgba(0, 44, 89, 0.75)
-  );
 `;
 
 class AddItemForm extends Component {

@@ -5,51 +5,20 @@ import { Link } from 'react-router-dom';
 import TakeMoney from './Payment.jsx';
 
 import styled from 'styled-components';
-import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
-import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
+import {
+  FormHeader,
+  CartDetailCard,
+  CartItemCard,
+  Desc,
+  CartItem,
+  CartImage,
+  WideDiv,
+  Right,
+} from './StyledComponents/Cart.jsx';
 
-const CartDetailCard = styled(ItemDetailCard)`
-  width: 550px;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
-`;
-
-const CartItemCard = styled(ItemCard)`
-  width: 450px;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
-`;
-
-const Desc = styled.div`
-  width: 350px;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
-`;
-
-const CartItem = styled.div`
-  display: flex;
-  width: 100%;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
-`;
-
-const CartImage = styled.img`
-  max-width: 60px;
-  margin: 15px;
-`;
-
-const WideDiv = styled.div`
-  text-align: center;
-`;
-
-const Right = styled.div`
-  padding-right: 30px;
-  text-align: right;
+const Header = styled(FormHeader)`
+  margin-bottom: 0;
 `;
 
 class ShoppingCart extends Component {
@@ -87,9 +56,6 @@ class ShoppingCart extends Component {
     this.props.handleCartTotal(grandTotal);
     return (
       <CartItemCard>
-        <h3>
-          <center>Shopping Cart</center>
-        </h3>
         {booksInCart.map(item => (
           <CartItem key={item.id}>
             <Link to={`/item/${item.id}`}>
@@ -115,12 +81,14 @@ class ShoppingCart extends Component {
             <strong>Total: ${grandTotal.toFixed(2)}</strong>
           </Right>
         </div>
-        <WideDiv>
-          <Link to="/">
-            <Button>Continue Shopping</Button>
-          </Link>{' '}
-          <TakeMoney />
-        </WideDiv>
+        <div>
+          <center>
+            <Link to="/">
+              <Button>Continue Shopping</Button>
+            </Link>{' '}
+            <TakeMoney />
+          </center>
+        </div>
       </CartItemCard>
     );
   };
@@ -135,16 +103,21 @@ class ShoppingCart extends Component {
     return (
       <CartDetailCard>
         <CartItemCard>
-          {cart.length > 0 ? (
-            this.populateUserCart()
-          ) : (
-            <>
-              <div>Your cart is empty.</div>{' '}
-              <Link to="/">
-                <Button>Continue Shopping</Button>
-              </Link>
-            </>
-          )}
+          <Header>
+            <center>Shopping Cart</center>
+          </Header>
+          <center>
+            {cart.length > 0 ? (
+              <center>{this.populateUserCart()}</center>
+            ) : (
+              <>
+                <div>Your cart is empty.</div>{' '}
+                <Link to="/">
+                  <Button>Continue Shopping</Button>
+                </Link>
+              </>
+            )}
+          </center>
         </CartItemCard>
       </CartDetailCard>
     );

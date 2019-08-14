@@ -3,50 +3,34 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { ItemDetailCard } from './StyledComponents/ItemDetailCard.jsx';
-import { ItemCard } from './StyledComponents/ItemCard.jsx';
 import { Button } from './StyledComponents/Buttons.jsx';
+import {
+  FormHeader,
+  CartDetailCard,
+  CartItemCard,
+  Desc,
+  CartItem,
+  CartImage,
+} from './StyledComponents/Cart.jsx';
 
-const ListDetailCard = styled(ItemDetailCard)`
-  width: 550px;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
+const Header = styled(FormHeader)`
+  margin-bottom: 0;
 `;
 
 const Form = styled.form`
   display: inline-block;
 `;
 
-const ListItemCard = styled(ItemCard)`
-  width: 450px;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
+const Image = styled(CartImage)`
+  max-width: 85px;
 `;
 
-const Desc = styled.div`
-  width: 350px;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
+const InlineButton = styled(Button)`
+  padding: 2px 7px;
 `;
 
-const ListItem = styled.div`
-  display: flex;
-  width: 100%;
-  font-size: 0.75rem;
-  text-align: left;
-  padding: 15px;
-`;
-
-const ListImage = styled.img`
-  max-width: 60px;
-  margin: 15px;
-`;
-
-const WideDiv = styled.div`
-  text-align: center;
+const ShopButton = styled(Button)`
+  margin: 25px auto 10px auto;
 `;
 
 class WishList extends Component {
@@ -124,14 +108,11 @@ class WishList extends Component {
     );
     console.log(booksInList);
     return (
-      <ListItemCard>
-        <h3>
-          <center>Wish List</center>
-        </h3>
+      <CartItemCard>
         {booksInList.map(item => (
-          <ListItem key={item.id}>
+          <CartItem key={item.id}>
             <Link to={`/item/${item.id}`}>
-              <ListImage src={item.imagePath} />
+              <Image src={item.imagePath} />
             </Link>
             <Desc>
               <div>
@@ -146,14 +127,14 @@ class WishList extends Component {
               </div>
               <div>${item.price}</div>
               <Form onSubmit={this.addToCart}>
-                <Button onClick={this.handleCartId} value={item.id}>
+                <InlineButton onClick={this.handleCartId} value={item.id}>
                   Add to Cart
-                </Button>
+                </InlineButton>
               </Form>
             </Desc>
-          </ListItem>
+          </CartItem>
         ))}
-      </ListItemCard>
+      </CartItemCard>
     );
   };
 
@@ -165,18 +146,22 @@ class WishList extends Component {
     }
     let list = this.props.itemsInWishList;
     return (
-      <ListDetailCard>
-        <ListItemCard>
-          {list.length > 0
-            ? this.populateWishList()
-            : "You haven't added anything to your wish list yet."}
+      <CartDetailCard>
+        <CartItemCard>
+          <Header>
+            <center>Wish List</center>
+          </Header>
           <center>
+            {list.length > 0
+              ? this.populateWishList()
+              : "You haven't added anything to your wish list yet."}
+
             <Link to="/">
-              <Button>Continue Shopping</Button>
+              <ShopButton>Continue Shopping</ShopButton>
             </Link>
           </center>
-        </ListItemCard>
-      </ListDetailCard>
+        </CartItemCard>
+      </CartDetailCard>
     );
   };
 }
