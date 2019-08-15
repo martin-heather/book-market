@@ -83,7 +83,7 @@ class ItemDetails extends Component {
   render = () => {
     console.log('this.state: ', this.state);
     if (this.state.loading) {
-      return 'loading';
+      return <ion-icon class="icon-big" name="refresh-circle" />;
     }
     console.log('this.props: ', this.props);
     console.log(this.props.itemObject);

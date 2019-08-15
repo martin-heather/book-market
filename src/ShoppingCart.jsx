@@ -97,7 +97,7 @@ class ShoppingCart extends Component {
     console.log('this.state: ', this.state);
     console.log('this.props: ', this.props);
     if (this.state.loading) {
-      return 'loading';
+      return <ion-icon class="icon-big" name="refresh-circle" />;
     }
     let cart = this.props.itemsInCart;
     return (

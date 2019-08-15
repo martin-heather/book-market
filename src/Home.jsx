@@ -29,7 +29,7 @@ class Home extends Component {
     super(props);
     this.state = {
       sortBy: 'default',
-      categories: [],
+      category: '',
       loading: true,
     };
   }
@@ -51,7 +51,7 @@ class Home extends Component {
     });
   };
 
-  handleCategories = evt => {
+  handleCategory = evt => {
     console.log('evt.target: ', evt.target);
     this.setState({
       category: evt.target.value,
@@ -128,7 +128,7 @@ class Home extends Component {
                 type="radio"
                 name="category"
                 value={category}
-                onClick={this.handleCategories}
+                onClick={this.handleCategory}
               />
               &nbsp;{category}
             </label>
@@ -141,7 +141,7 @@ class Home extends Component {
 
   render() {
     if (this.state.loading) {
-      return 'loading';
+      return <ion-icon class="icon-big" name="refresh-circle" />;
     }
     console.log('this.props: ', this.props);
     console.log('this.state: ', this.state);
@@ -152,6 +152,7 @@ class Home extends Component {
     console.log(inventory);
     //CATEGORY FILTER
     const category = this.state.category;
+    console.log('category: ', category);
     let filter = () => {
       let filteredInventory = inventory.filter(item =>
         item.categories.includes(category)

@@ -297,7 +297,7 @@ class Item {
     title,
     author,
     desc,
-    category,
+    categories,
     language,
     imagePath,
     price,
@@ -307,7 +307,7 @@ class Item {
     this.title = title;
     this.author = author;
     this.desc = desc;
-    this.category = category;
+    this.categories = categories;
     this.language = language;
     this.imagePath = imagePath;
     this.price = price;
@@ -439,11 +439,11 @@ app.post('/additem', upload.single('image'), (req, res) => {
   const sessionId = req.cookies.sid;
   const username = sessions[sessionId];
   console.log('username', username);
-  const id = generateId();
+  const id = Math.floor(Math.random() * 100000000);
   const title = req.body.title;
   const author = req.body.author;
   const language = req.body.language;
-  const category = req.body.category;
+  const categories = req.body.categories;
   const price = req.body.price;
   const desc = req.body.desc;
   const seller = username;
@@ -453,7 +453,7 @@ app.post('/additem', upload.single('image'), (req, res) => {
     title,
     author,
     desc,
-    category,
+    categories,
     language,
     imagePath,
     price,

@@ -72,7 +72,7 @@ class AddItemForm extends Component {
       author: '',
       desc: '',
       language: '',
-      category: '',
+      categories: [],
       price: '',
       imagePath: '',
     };
@@ -86,7 +86,7 @@ class AddItemForm extends Component {
     data.append('author', this.state.author);
     data.append('desc', this.state.desc);
     data.append('language', this.state.language);
-    data.append('category', this.state.category);
+    data.append('categories', this.state.categories);
     data.append('price', this.state.price);
     data.append('image', this.state.image);
     const response = await fetch('/additem', {
@@ -118,7 +118,7 @@ class AddItemForm extends Component {
     this.setState({ language: evt.target.value });
   };
   handleCategory = evt => {
-    this.setState({ category: evt.target.value });
+    this.setState({ categories: [evt.target.value] });
   };
   handlePrice = evt => {
     this.setState({ price: evt.target.value });
@@ -172,7 +172,7 @@ class AddItemForm extends Component {
               required
               type="text"
               onChange={this.handleCategory}
-              value={this.state.category}
+              value={this.state.categories}
             />
           </label>
           <br />

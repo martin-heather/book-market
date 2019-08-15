@@ -43,6 +43,7 @@ function reducer(state = initialState, action) {
         allInventory: action.inventory,
       };
     case 'UPDATE_INVENTORY':
+      console.log(state, action);
       return {
         ...state,
         allInventory: [action.newItem],
