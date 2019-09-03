@@ -2,7 +2,7 @@
 
 Built as a full-stack web application, Alibay is a marketplace that lets users find and sell books. It was my final project for the Concordia web development diploma program.
 
-![preview](images/screenshots/catalogue.jpg)
+![](public/images/screenshots/catalogue.jpg)
 
 ## Project features:
 
@@ -18,4 +18,29 @@ The technologies used to build the Alibay Marketplace include HTML5, CSS3, JavaS
 
 The demo video can be viewed at [heathermartin.ca/alibay.html](http://heathermartin.ca/alibay.html).
 
-![](name-of-giphy.gif)
+## Screenshots:
+
+<figure>
+ <figcaption>
+ Login Screen
+ </figcaption>
+ <img src='public/images/screenshots/login.gif' width='500' alt='Login gif' />
+</figure>
+<figure>
+<figcaption>
+ Wish List
+ </figcaption>
+ <img src='public/images/screenshots/wish-list.jpg' width='500' alt='Wish List Screen Capture' />
+</figure>
+<figure>
+<figcaption>
+ Shopping Cart 
+ </figcaption>
+ <img src='public/images/screenshots/shopping-cart.jpg' width='500' alt='Shopping Cart Screen Capture' />
+</figure>
+<figure>
+ <figcaption>
+ Seller's Form
+ </figcaption>
+ <img src='public/images/screenshots/sell.jpg' width='500' alt="Seller's Form" />
+</figure>
