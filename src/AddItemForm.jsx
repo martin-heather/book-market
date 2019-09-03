@@ -210,7 +210,7 @@ class AddItemForm extends Component {
           </label>
           <center>
             <Button>Add Book to Inventory</Button>{' '}
-            <InputButton type="reset" value="Reset Form" />
+            {/* <InputButton type="reset" value="Reset Form" /> */}
           </center>
         </form>
         <center>

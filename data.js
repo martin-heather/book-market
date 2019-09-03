@@ -1,4 +1,4 @@
-export const inventory = [
+const inventory = [
   {
     id: 1,
     title: 'Sapiens: A Brief History of Humankind',
@@ -263,7 +263,7 @@ export const inventory = [
   },
 ];
 
-export const userProfiles = [
+const userProfiles = [
   {
     name: 'Heather Martin',
     password: 'Bowski',
@@ -300,3 +300,5 @@ export const userProfiles = [
     itemsInCart: [],
   },
 ];
+
+module.exports = { inventory, userProfiles };

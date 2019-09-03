@@ -4,7 +4,7 @@ import StripeCheckout from 'react-stripe-checkout';
 
 import { Button } from './StyledComponents/Buttons.jsx';
 
-class TakeMoney extends React.Component {
+class Checkout extends React.Component {
   onToken = token => {
     fetch('/save-stripe-token', {
       method: 'POST',
@@ -12,6 +12,7 @@ class TakeMoney extends React.Component {
     }).then(res => {
       res.json().then(() => {
         alert(`Thank you for your purchase.`);
+        this.props.handleClearCart;
       });
     });
   };
@@ -19,7 +20,10 @@ class TakeMoney extends React.Component {
   render() {
     return (
       <StripeCheckout
-        token={this.props.handleClearCart}
+        image="/images/a.png"
+        name="Alibay Bookstore"
+        billingAddress
+        token={this.onToken}
         stripeKey="pk_test_Dd1CvRncizSuBMF57u8wU9Jl00r2AcxDSj"
         amount={this.props.cartTotal * 100}
       >
@@ -43,4 +47,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TakeMoney);
+)(Checkout);

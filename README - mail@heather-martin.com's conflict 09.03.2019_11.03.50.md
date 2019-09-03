@@ -16,6 +16,8 @@ Built as a full-stack web application, Alibay is a marketplace that lets users f
 
 The technologies used to build the Alibay Marketplace include HTML5, CSS3, JavaScript, React, Redux, Node.js, and Express.js
 
-The demo video can be viewed at [heathermartin.ca/alibay.html](http://heathermartin.ca/alibay.html).
+![preview](images/screenshots/wish-list.jpg) ![preview](images/screenshots/shopping-cart.jpg)
 
-![](name-of-giphy.gif)
+![](images/screenshots/login.gif) ![preview](images/screenshots/sell.jpg)
+
+The demo video can be viewed at [heathermartin.ca/alibay.html](http://heathermartin.ca/alibay.html).
