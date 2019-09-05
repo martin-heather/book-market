@@ -24,7 +24,13 @@ The demo video can be viewed at [heathermartin.ca/alibay.html](http://heathermar
  <figcaption>
  Login Screen
  </figcaption>
- <img src='public/images/screenshots/login.gif' width='500' alt='Login gif' />
+ <img src='public/images/screenshots/login.gif' width='600' alt='Login gif' />
+</figure>
+<figure>
+<figcaption>
+ Item Detail
+ </figcaption>
+ <img src='public/images/screenshots/item-detail.jpg' width='600' alt='Item Detail Screen Capture' />
 </figure>
 <figure>
 <figcaption>
